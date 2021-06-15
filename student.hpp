@@ -3,16 +3,18 @@
 #include <iostream>
 #include <string>
 
+
 class Student {
-private:
+    private:  
     std::string name_;
     std::string surname_;
     std::string address_;
-    int index_;
+    unsigned int index_;
     size_t pesel_;
     char gender_;  //Not Specified Male Female Non-Binary
-
+    
 public:
+    
     Student(std::string name = "name", std::string surname = "surname", std::string address_ = "address", unsigned int index = 1234, size_t pesel = 12345678910, char gender = 'G');
     void setName(const std::string& name) { name_ = name; }
     void setSurname(const std::string& surname) { surname_ = surname; }
@@ -24,8 +26,10 @@ public:
     std::string getName() const { return name_; }
     std::string getSurname() const { return surname_; }
     std::string getAddress() const { return address_; }
-    int getIndex() const { return index_; }
-    int getPesel() const { return pesel_; }
+    unsigned int getIndex() const { return index_; }
+    size_t getPesel() const { return pesel_; }
     char getGender() const { return gender_; }
+
+    bool checkPesel(size_t pesel);
 };
 

@@ -1,17 +1,19 @@
 #pragma once
+#include "student.hpp"
 #include <string>
 #include <vector>
-#include "student.hpp"
 
 // Wyświetlanie całej bazy danych zrobie w interfejsie
 
 class Db {
-private:
+public:
+    
     std::vector<Student> db_;
-    bool checkPesel(size_t pesel);
 
 public:
-    bool addStudent(); //powinna korzystać z funkcji do walidacji pesel
+    Db(void);
+    Db(const Student& person);
+    bool addStudent();  //powinna korzystać z funkcji do walidacji pesel
     Student search(const std::string& surname);
     Student search(size_t pesel);
     void sort(const std::string& surname);

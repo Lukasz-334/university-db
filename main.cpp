@@ -1,15 +1,24 @@
 #include <iostream>
 #include <string>
+#include <iomanip>
 #include "db.hpp"
 #include "student.hpp"
 
 
 int main() {
 
-    Student student1("Jan","Nowak","Poznan",4532,92071645517,'M');
+    Student student1("Jan","Nowak","Poznan",4532,44051401458,'M');
     
-    std::cout << "student 1 name: " << student1.getName() << '\n';
-    std::cout << "student 1 surname: " << student1.getSurname() << '\n';
-    std::cout << "student 1 address: " << student1.getAddress() << '\n';
-    std::cout << "student 1 gender: " << student1.getGender() << '\n';
+    Db bd2(student1);
+    bool score;
+    
+
+    score = bd2.db_[0].checkPesel(student1.getPesel());
+    
+    
+    std::cout<<std::boolalpha<<score<<'\n';
+    
+   
+    
+    //std::cout << "student 1 gender: " << student1.getPesel() << '\n';
 }
