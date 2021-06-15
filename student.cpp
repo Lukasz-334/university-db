@@ -2,29 +2,42 @@
 #include "db.hpp"
 
 Student::Student(std::string name, std::string surname, std::string address, unsigned int index, size_t pesel, char gender)
-: name_(name)
-, surname_(surname)
-, address_(address)
-, index_(index)
-, pesel_(pesel)
-, gender_(gender)
-{}
+    : name_(name), surname_(surname), address_(address), index_(index), pesel_(pesel), gender_(gender) {}
 
-bool Student::checkPesel(size_t pesel) {
-    int multiplication[11] = {1, 3, 7, 9, 1, 3, 7, 9, 1, 3, 1};
+void Student::setName(const std::string& name) {
+    name_ = name;
+}
+void Student::setSurname(const std::string& surname) {
+    surname_ = surname;
+}
+void Student::setAddress(const std::string& address) {
+    address_ = address;
+}
+void Student::setIndex(unsigned int index) {
+    index_ = index;
+}
+void Student::setPesel(size_t pesel) {
+    pesel_ = pesel;
+}
+void Student::setGender(char gender) {
+    gender_ = gender;
+}
 
-    int sum = 0;
-
-    int tab_pesel[11]{};
-
-    for (int i = 10; i >= 0; i--) {
-        tab_pesel[i] = pesel % 10;
-        pesel = pesel / 10;
-    }
-
-    for (int i = 0; i < 11; i++) {
-        sum = tab_pesel[i] * multiplication[i] + sum;
-    }
-
-    return ((sum > 0) && (sum % 10 == 0));
+std::string Student::getName() const {
+    return name_;
+}
+std::string Student::getSurname() const {
+    return surname_;
+}
+std::string Student::getAddress() const {
+    return address_;
+}
+unsigned int Student::getIndex() const {
+    return index_;
+}
+size_t Student::getPesel() const {
+    return pesel_;
+}
+char Student::getGender() const {
+    return gender_;
 }
