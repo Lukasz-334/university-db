@@ -3,14 +3,8 @@
 #include <string>
 #include "student.hpp"
 
-Db::Db(const Student& person) {
-    db_.push_back(person);
-}
-
-Db::Db(std::vector<Student>& db) {
-    for (auto person : db) {
-        db_.push_back(person);
-    }
+size_t Db::getDbSize() const {
+    return db_.size();
 }
 
 bool Db::checkPesel(size_t pesel) {
@@ -27,64 +21,80 @@ bool Db::checkPesel(size_t pesel) {
     return ((sum > 0) && (sum % 10 == 0));
 }
 
-
-// Student::Student(std::string name, std::string surname, std::string address, unsigned int index, size_t pesel, char gender)
-
 bool Db::addStudent() {
+    bool echo = true;
     Student tmp_stud;
     std::string tmp_str;   //tymczasowy string
     unsigned int tmp_int;  //tymczasowy unsint
     size_t tmp_size;       // to zmienne na chwile
     std::cout << "\n Name: ";
     std::cin >> tmp_str;
+    if (echo) {
+        std::cout << tmp_str << '\n';
+    }
     tmp_stud.setName(tmp_str);
-    std::cout << "\n Surname: ";
+    std::cout << " Surname: ";
     std::cin >> tmp_str;
+    if (echo) {
+        std::cout << tmp_str << '\n';
+    }
     tmp_stud.setSurname(tmp_str);
-    std::cout << "\n Address: ";
+    std::cout << " Address: ";
     std::cin >> tmp_str;
+    if (echo) {
+        std::cout << tmp_str << '\n';
+    }
     tmp_stud.setAddress(tmp_str);
-    std::cout << "\n Index: ";
+    std::cout << " Index: ";
     std::cin >> tmp_int;
+    if (echo) {
+        std::cout << tmp_int << '\n';
+    }
     tmp_stud.setIndex(tmp_int);
-    std::cout << "\n Gender: ";
+    std::cout << " Gender: ";
     std::cin >> tmp_str;
+    if (echo) {
+        std::cout << tmp_str << '\n';
+    }
     tmp_stud.setGender(tmp_str);
-    std::cout << "\n PESEL: ";
+    std::cout << " PESEL: ";
     std::cin >> tmp_size;
+    if (echo) {
+        std::cout << tmp_size << '\n';
+    }
+
     if (checkPesel(tmp_size)) {
         tmp_stud.setPesel(tmp_size);
         db_.emplace_back(tmp_stud);
         return true;
     } else {
-        std::cout << "\n Wrong PESEL !  ";
+        std::cout << "\n Wrong PESEL !\n";
         return false;
+    }
+}
 
-
-void Db::searchSurname(const std::string& s_name) {
+void Db::searchSurname(const std::string& surname) {
     std::vector<Student> Vecsurname;
 
     for (auto person1 : Db::db_) {
-        if (person1.getSurname() == s_name) {
+        if (person1.getSurname() == surname) {
             Vecsurname.push_back(person1);
         }
     }
     if (Vecsurname.empty()) {
-        std::cout << "there is no student in the base " << '\n';
+        std::cout << "There is no such student in the database.\n";
     } else if (Vecsurname.size() == 1) {
-        std::cout << "There are 1 student in the database: "<<'\n';
+        std::cout << "There is 1 student in the database:\n";
         std::cout << Vecsurname[0].getSurname() << ' ';
         std::cout << Vecsurname[0].getName() << std::endl;
 
     } else {
-        std::cout << "There are " << Vecsurname.size() << " students at the base" << '\n';
+        std::cout << "There are " << Vecsurname.size() << " students in the database:\n";
         for (auto person2 : Vecsurname) {
             std::cout << person2.getSurname() << ' ';
             std::cout << person2.getName() << std::endl;
         }
-
     }
-   
 }
 
 // Student Db::search(size_t pesel) {
