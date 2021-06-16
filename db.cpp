@@ -1,10 +1,16 @@
 #include "db.hpp"
-#include "student.hpp"
 #include <iostream>
 #include <string>
+#include "student.hpp"
 
-Db::Db(const Student& p) {
-    db_.push_back(p);
+Db::Db(const Student& person) {
+    db_.push_back(person);
+}
+
+Db::Db(std::vector<Student>& db) {
+    for (auto person : db) {
+        db_.push_back(person);
+    }
 }
 
 bool Db::checkPesel(size_t pesel) {
@@ -21,21 +27,43 @@ bool Db::checkPesel(size_t pesel) {
     return ((sum > 0) && (sum % 10 == 0));
 }
 
-// Student::Student(std::string name, std::string surname, std::string address, unsigned int index, size_t pesel, char gender)
- 
- bool Db::addStudent() {
-     Student tmp_stud;
-     std::string tmp_str; //tymczasowy string
-     size_t tmp_int; //tymczasowy numer
-     std::cout << "\n Name: ";
-     std::cin >> tmp_str;
-     tmp_stud.setName(tmp_str);
-     
-     return true;
+// Student::Student(std::string name, std::string surname, std::string address, unsigned int index, size_t pesel, std::string gender)
+
+bool Db::addStudent() {
+    Student tmp_stud;
+    std::string tmp_str;  //tymczasowy string
+    size_t tmp_int;       //tymczasowy numer
+    std::cout << "\n Name: ";
+    std::cin >> tmp_str;
+    tmp_stud.setName(tmp_str);
+
+    return true;
 }
 
-// Student Db::search(const std::string& surname) {
-// }
+void Db::searchSurname(const std::string& s_name) {
+    std::vector<Student> Vecsurname;
+
+    for (auto person1 : Db::db_) {
+        if (person1.getSurname() == s_name) {
+            Vecsurname.push_back(person1);
+        }
+    }
+    if (Vecsurname.empty()) {
+        std::cout << "there is no student in the base " << '\n';
+    } else if (Vecsurname.size() == 1) {
+        std::cout << "There are 1 student in the database: "<<'\n';
+        std::cout << Vecsurname[0].getSurname() << ' ';
+        std::cout << Vecsurname[0].getName() << std::endl;
+
+    } else {
+        std::cout << "There are " << Vecsurname.size() << " students at the base" << '\n';
+        for (auto person2 : Vecsurname) {
+            std::cout << person2.getSurname() << ' ';
+            std::cout << person2.getName() << std::endl;
+        }
+    }
+}
+
 // Student Db::search(size_t pesel) {
 // }
 // void Db::sort(const std::string& surname) {

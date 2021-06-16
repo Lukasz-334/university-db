@@ -1,7 +1,7 @@
 #include "student.hpp"
 #include "db.hpp"
 
-Student::Student(std::string name, std::string surname, std::string address, unsigned int index, size_t pesel, char gender)
+Student::Student(std::string name, std::string surname, std::string address, unsigned int index, size_t pesel, std::string gender)
     : name_(name), surname_(surname), address_(address), index_(index), pesel_(pesel), gender_(gender) {}
 
 void Student::setName(const std::string& name) {
@@ -19,7 +19,7 @@ void Student::setIndex(unsigned int index) {
 void Student::setPesel(size_t pesel) {
     pesel_ = pesel;
 }
-void Student::setGender(char gender) {
+void Student::setGender(std::string gender) {
     gender_ = gender;
 }
 
@@ -38,6 +38,6 @@ unsigned int Student::getIndex() const {
 size_t Student::getPesel() const {
     return pesel_;
 }
-char Student::getGender() const {
+std::string Student::getGender() const {
     return gender_;
 }
