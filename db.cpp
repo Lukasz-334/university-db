@@ -1,7 +1,7 @@
 #include "db.hpp"
-#include "student.hpp"
 #include <iostream>
 #include <string>
+#include "student.hpp"
 
 Db::Db(const Student& p) {
     db_.push_back(p);
@@ -22,16 +22,38 @@ bool Db::checkPesel(size_t pesel) {
 }
 
 // Student::Student(std::string name, std::string surname, std::string address, unsigned int index, size_t pesel, char gender)
- 
- bool Db::addStudent() {
-     Student tmp_stud;
-     std::string tmp_str; //tymczasowy string
-     size_t tmp_int; //tymczasowy numer
-     std::cout << "\n Name: ";
-     std::cin >> tmp_str;
-     tmp_stud.setName(tmp_str);
-     
-     return true;
+
+bool Db::addStudent() {
+    Student tmp_stud;
+    std::string tmp_str;   //tymczasowy string
+    unsigned int tmp_int;  //tymczasowy unsint
+    size_t tmp_size;       // to zmienne na chwile
+    char tmp_char;         //potrzebne wszystkich typow
+    std::cout << "\n Name: ";
+    std::cin >> tmp_str;
+    tmp_stud.setName(tmp_str);
+    std::cout << "\n Surname: ";
+    std::cin >> tmp_str;
+    tmp_stud.setSurname(tmp_str);
+    std::cout << "\n Address: ";
+    std::cin >> tmp_str;
+    tmp_stud.setAddress(tmp_str);
+    std::cout << "\n Index: ";
+    std::cin >> tmp_int;
+    tmp_stud.setIndex(tmp_int);
+    std::cout << "\n Gender: ";
+    std::cin >> tmp_char;
+    tmp_stud.setGender(tmp_char);
+    std::cout << "\n PESEL: ";
+    std::cin >> tmp_size;
+    if (checkPesel(tmp_size)) {
+        tmp_stud.setPesel(tmp_size);
+        db_.emplace_back(tmp_stud);
+        return true;
+    } else {
+        std::cout << "\n Wrong PESEL !  ";
+        return false;
+    }
 }
 
 // Student Db::search(const std::string& surname) {
