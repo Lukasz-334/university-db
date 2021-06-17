@@ -3,9 +3,6 @@
 #include <string>
 #include "student.hpp"
 
-size_t Db::getDbSize() const {
-    return db_.size();
-}
 Db::Db(){};
 
 Db::Db(const Student& person) {
@@ -16,6 +13,10 @@ Db::Db(std::vector<Student>& db) {
     for (auto st : db) {
         db_.push_back(st);
     }
+}
+
+size_t Db::getDbSize() const {
+    return db_.size();
 }
 
 bool Db::checkPesel(size_t pesel) {

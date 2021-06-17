@@ -4,8 +4,24 @@
 #include "db.hpp"
 #include "student.hpp"
 
+void testsearchSurname(Db& test1) {
+    std::cout<<"test searchSurname "<<'\n';
+    int nr_test = 0;
+    std::string surname2;
+
+    std::cout << "enter the number of tests: ";
+    std::cin >> nr_test;
+
+    for (int i = 0; i < nr_test; i++) {
+        std::cout << "enter the surname: ";
+        std::cin >> surname2;
+
+        test1.searchSurname(surname2);
+    }
+}
 
 void testSearchPesel(Db& test2) {
+     std::cout<<"test searchPesel "<<'\n';
     int nr_test = 0;
     size_t pesel2 = 0;
 
@@ -49,7 +65,7 @@ int main() {
 
     std::cout << "No. of student in Daabase: " << bd2.getDbSize() << '\n';
     */
-   
+    testsearchSurname(bd2);
     testSearchPesel(bd2);
 
     return 0;
