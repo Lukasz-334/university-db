@@ -36,9 +36,9 @@ bool Db::checkPesel(size_t pesel) {
 bool Db::addStudent() {
     bool echo = true;
     Student tmp_stud;
-    std::string tmp_str;   //tymczasowy string
-    size_t tmp_int;  //tymczasowy unsint
-    size_t tmp_size;       // to zmienne na chwile
+    std::string tmp_str;  //tymczasowy string
+    size_t tmp_int;       //tymczasowy unsint
+    size_t tmp_size;      // to zmienne na chwile
     std::cout << "\n Name: ";
     std::cin >> tmp_str;
     if (echo) {
@@ -85,7 +85,7 @@ bool Db::addStudent() {
     }
 }
 
-void Db::searchSurname(const std::string& surname) {
+std::vector<Student> Db::searchSurname(const std::string& surname) {
     std::vector<Student> Vecsurname;
 
     for (auto person1 : Db::db_) {
@@ -93,41 +93,20 @@ void Db::searchSurname(const std::string& surname) {
             Vecsurname.push_back(person1);
         }
     }
-    if (Vecsurname.empty()) {
-        std::cout << "There is no such student in the database.\n";
-    } else if (Vecsurname.size() == 1) {
-        std::cout << "There is 1 student in the database:\n";
-        std::cout << Vecsurname[0].getSurname() << ' ';
-        std::cout << Vecsurname[0].getName() << std::endl;
-
-    } else {
-        std::cout << "There are " << Vecsurname.size() << " students in the database:\n";
-        for (auto person2 : Vecsurname) {
-            std::cout << person2.getSurname() << ' ';
-            std::cout << person2.getName() << std::endl;
-        }
-    }
+    return Vecsurname;
 }
 
-void Db::searchPesel(const size_t pesel) {
-    bool test = true;
-    size_t Pesel_found = 1;
-    int nr_student = 0;
+std::vector<Student> Db::searchPesel(const size_t pesel) {
+    std::vector<Student> Vecpesel;
+    Vecpesel.reserve(1);
 
     for (int i = 0; i < Db::db_.size(); i++) {
         if (db_[i].getPesel() == pesel) {
-            test = false;
-            nr_student = i;
-            break;
+            Vecpesel.push_back(db_[i]);
+            break;  
         }
     }
-    if (test) {
-        std::cout << "no pesel in the database " << '\n';
-    } else {
-        std::cout << db_[nr_student].getSurname() << ' '
-                  << db_[nr_student].getName() << ' '
-                  << db_[nr_student].getPesel() << '\n';
-    }
+return Vecpesel;  
 }
 
 int Db::searchIndex(const size_t index2) {
@@ -142,8 +121,13 @@ int Db::searchIndex(const size_t index2) {
 
     return nr_index;
 }
-// void Db::sort(const std::string& surname) {
-// }
+
+
+
+
+
+
+
 // void Db::sort(size_t pesel) {
 // }
 // void Db::del(size_t index) {

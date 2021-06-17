@@ -5,6 +5,7 @@
 #include "student.hpp"
 
 void testsearchSurname(Db& test1) {
+    std::vector<Student>st;
     std::cout<<"test searchSurname "<<'\n';
     int nr_test = 0;
     std::string surname2;
@@ -16,11 +17,15 @@ void testsearchSurname(Db& test1) {
         std::cout << "enter the surname: ";
         std::cin >> surname2;
 
-        test1.searchSurname(surname2);
+        st=test1.searchSurname(surname2);
+        for(auto x:st){
+            std::cout<<x.getName()<<' '<<x.getSurname()<<std::endl;
+        }
     }
 }
 
 void testSearchPesel(Db& test2) {
+    std::vector<Student>st;
      std::cout<<"test searchPesel "<<'\n';
     int nr_test = 0;
     size_t pesel2 = 0;
@@ -32,7 +37,10 @@ void testSearchPesel(Db& test2) {
         std::cout << "enter the pesel: ";
         std::cin >> pesel2;
 
-        test2.searchPesel(pesel2);
+        st=test2.searchPesel(pesel2);
+        for(auto x:st){
+            std::cout<<x.getSurname()<<' '<<x.getName()<<std::endl;
+        }
     }
 }
 

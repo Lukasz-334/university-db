@@ -15,8 +15,8 @@ public:
     Db(std::vector<Student>& db);
     bool checkPesel(size_t);
     bool addStudent();  //powinna korzystać z funkcji do walidacji pesel
-    void searchSurname(const std::string& surname);
-    void searchPesel(const size_t pesel);
+    std::vector<Student> searchSurname(const std::string& surname);
+    std::vector<Student> searchPesel(const size_t pesel);
     int searchIndex(const size_t index2);
     void sort(const std::string&);
     void sort(size_t);
