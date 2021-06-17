@@ -65,6 +65,8 @@ int main() {
 
     std::cout << "No. of student in Daabase: " << bd2.getDbSize() << '\n';
     */
+
+     
     testsearchSurname(bd2);
     testSearchPesel(bd2);
 

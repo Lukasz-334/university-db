@@ -37,7 +37,7 @@ bool Db::addStudent() {
     bool echo = true;
     Student tmp_stud;
     std::string tmp_str;   //tymczasowy string
-    unsigned int tmp_int;  //tymczasowy unsint
+    size_t tmp_int;  //tymczasowy unsint
     size_t tmp_size;       // to zmienne na chwile
     std::cout << "\n Name: ";
     std::cin >> tmp_str;
@@ -130,9 +130,21 @@ void Db::searchPesel(const size_t pesel) {
     }
 }
 
+int Db::searchIndex(const size_t index2) {
+    int nr_index = -1;
+
+    for (int i = 0; i < Db::db_.size(); i++) {
+        if (db_[i].getIndex() == index2) {
+            nr_index = i;
+            return nr_index;
+        }
+    }
+
+    return nr_index;
+}
 // void Db::sort(const std::string& surname) {
 // }
 // void Db::sort(size_t pesel) {
 // }
-// void Db::del(unsigned int index) {
+// void Db::del(size_t index) {
 // }

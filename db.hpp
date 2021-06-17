@@ -8,7 +8,7 @@
 class Db {
 public:
     std::vector<Student> db_;
-
+    
 public:
     Db();
     Db(const Student& person);
@@ -17,9 +17,10 @@ public:
     bool addStudent();  //powinna korzystać z funkcji do walidacji pesel
     void searchSurname(const std::string& surname);
     void searchPesel(const size_t pesel);
+    int searchIndex(const size_t index2);
     void sort(const std::string&);
     void sort(size_t);
-    void del(unsigned int);
+    void del(size_t);
 
     size_t getDbSize() const;
 };
