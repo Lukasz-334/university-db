@@ -10,13 +10,13 @@ public:
     std::vector<Student> db_;
 
 public:
-    // Db(void);
-    // Db(const Student& person);
-    // Db(std::vector<Student>& db);
+    Db();
+    Db(const Student& person);
+    Db(std::vector<Student>& db);
     bool checkPesel(size_t);
     bool addStudent();  //powinna korzystać z funkcji do walidacji pesel
     void searchSurname(const std::string& surname);
-    Student search(size_t);
+    void searchPesel(const size_t pesel);
     void sort(const std::string&);
     void sort(size_t);
     void del(unsigned int);

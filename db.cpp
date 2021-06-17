@@ -6,6 +6,17 @@
 size_t Db::getDbSize() const {
     return db_.size();
 }
+Db::Db(){};
+
+Db::Db(const Student& person) {
+    db_.push_back(person);
+}
+
+Db::Db(std::vector<Student>& db) {
+    for (auto st : db) {
+        db_.push_back(st);
+    }
+}
 
 bool Db::checkPesel(size_t pesel) {
     int multiplication[11] = {1, 3, 7, 9, 1, 3, 7, 9, 1, 3, 1};
@@ -97,8 +108,27 @@ void Db::searchSurname(const std::string& surname) {
     }
 }
 
-// Student Db::search(size_t pesel) {
-// }
+void Db::searchPesel(const size_t pesel) {
+    bool test = true;
+    size_t Pesel_found = 1;
+    int nr_student = 0;
+
+    for (int i = 0; i < Db::db_.size(); i++) {
+        if (db_[i].getPesel() == pesel) {
+            test = false;
+            nr_student = i;
+            break;
+        }
+    }
+    if (test) {
+        std::cout << "no pesel in the database " << '\n';
+    } else {
+        std::cout << db_[nr_student].getSurname() << ' '
+                  << db_[nr_student].getName() << ' '
+                  << db_[nr_student].getPesel() << '\n';
+    }
+}
+
 // void Db::sort(const std::string& surname) {
 // }
 // void Db::sort(size_t pesel) {
