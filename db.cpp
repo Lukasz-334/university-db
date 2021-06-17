@@ -1,6 +1,6 @@
 #include "db.hpp"
-#include "student.hpp"
 #include <iostream>
+#include "student.hpp"
 
 Db::Db(){};
 
@@ -86,7 +86,7 @@ bool Db::addStudent() {
 
 void Db::searchSurname(const std::string& surname) {
     bool studNotFound = true;
-    std::cout << "Searching by surname: " <<surname<<std::endl;
+    std::cout << "Searching by surname: " << surname << std::endl;
     for (auto person1 : Db::db_) {
         if (person1.getSurname() == surname) {
             //person1.personalData();
@@ -126,7 +126,7 @@ int Db::searchIndex(const size_t index2) {
 
     return nr_index;
 }
-/*
+
 void Db::sortSurname() {
     std::sort(db_.begin(), db_.end());
 }
