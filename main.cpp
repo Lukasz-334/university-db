@@ -5,7 +5,6 @@
 #include "student.hpp"
 
 void testsearchSurname(Db& test1) {
-    std::vector<Student>st;
     std::cout<<"test searchSurname "<<'\n';
     int nr_test = 0;
     std::string surname2;
@@ -17,16 +16,13 @@ void testsearchSurname(Db& test1) {
         std::cout << "enter the surname: ";
         std::cin >> surname2;
 
-        st=test1.searchSurname(surname2);
-        for(auto x:st){
-            std::cout<<x.getName()<<' '<<x.getSurname()<<std::endl;
-        }
+        test1.searchSurname(surname2);
     }
 }
 
 void testSearchPesel(Db& test2) {
-    std::vector<Student>st;
-     std::cout<<"test searchPesel "<<'\n';
+
+    std::cout<<"test searchPesel "<<'\n';
     int nr_test = 0;
     size_t pesel2 = 0;
 
@@ -37,14 +33,13 @@ void testSearchPesel(Db& test2) {
         std::cout << "enter the pesel: ";
         std::cin >> pesel2;
 
-        st=test2.searchPesel(pesel2);
-        for(auto x:st){
-            std::cout<<x.getSurname()<<' '<<x.getName()<<std::endl;
-        }
+        test2.searchPesel(pesel2);
+        
     }
 }
 
 int main() {
+
     std::vector<Student> test;
 
     test.push_back(Student("Jan", "Nowak", "Poznan", 4532, 90051401458, "M"));
@@ -75,8 +70,8 @@ int main() {
     */
 
      
-    testsearchSurname(bd2);
-    testSearchPesel(bd2);
+   testsearchSurname(bd2);
+   testSearchPesel(bd2);
 
     return 0;
 }

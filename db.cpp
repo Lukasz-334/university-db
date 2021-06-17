@@ -1,7 +1,6 @@
 #include "db.hpp"
-#include <iostream>
-#include <string>
 #include "student.hpp"
+#include <iostream>
 
 Db::Db(){};
 
@@ -85,28 +84,34 @@ bool Db::addStudent() {
     }
 }
 
-std::vector<Student> Db::searchSurname(const std::string& surname) {
-    std::vector<Student> Vecsurname;
-
+void Db::searchSurname(const std::string& surname) {
+    bool studNotFound = true;
+    std::cout << "Searching by surname: " <<surname<<std::endl;
     for (auto person1 : Db::db_) {
         if (person1.getSurname() == surname) {
-            Vecsurname.push_back(person1);
+            //person1.personalData();
+            studNotFound = false;
         }
     }
-    return Vecsurname;
+    if (studNotFound) {
+        std::cout << "Not found.\n";
+    }
 }
 
-std::vector<Student> Db::searchPesel(const size_t pesel) {
-    std::vector<Student> Vecpesel;
-    Vecpesel.reserve(1);
+void Db::searchPesel(const size_t pesel) {
+    bool peselNotFound = true;
+    std::cout << "Searching by pesel: " << pesel << '\n';
 
-    for (int i = 0; i < Db::db_.size(); i++) {
-        if (db_[i].getPesel() == pesel) {
-            Vecpesel.push_back(db_[i]);
-            break;  
+    for (auto person1 : Db::db_) {
+        if (person1.getPesel() == pesel) {
+            //person1.personalData();
+            peselNotFound = false;
+            break;
         }
     }
-return Vecpesel;  
+    if (peselNotFound) {
+        std::cout << "Not found.\n";
+    }
 }
 
 int Db::searchIndex(const size_t index2) {
@@ -121,13 +126,11 @@ int Db::searchIndex(const size_t index2) {
 
     return nr_index;
 }
-
-
-
-
-
-
-
+/*
+void Db::sortSurname() {
+    std::sort(db_.begin(), db_.end());
+}
+*/
 // void Db::sort(size_t pesel) {
 // }
 // void Db::del(size_t index) {

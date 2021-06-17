@@ -21,7 +21,7 @@ public:
     void setIndex(size_t);
     void setPesel(size_t);
     void setGender(std::string);
-
+    void personalData();
     std::string getName() const;
     std::string getSurname() const;
     std::string getAddress() const;
