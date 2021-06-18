@@ -131,15 +131,18 @@ void Db::searchPeselInMenu() {
 //     }
 
 //     return nr_index;
- 
+  
+
 
 void Db::sortSurname() 
 {
     std::sort(db_.begin(), db_.end());
 }
-/*
+
 void Db::sortPesel()
 {
-   std::sort(db_.begin(), db_.end());
+   std::sort(db_.begin(), db_.end(),[](Student a, Student b) 
+   {
+        return a.getPesel()<b.getPesel();
+   });
 }
-*/

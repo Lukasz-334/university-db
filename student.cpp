@@ -14,15 +14,8 @@ bool Student::operator<(const Student& student_a)
 return student_a.getSurname()>surname_;
 
 }
-/*
-bool Student::operator<(const Student& student_b)
 
-{
 
-return student_b.getPesel()<pesel_;
-
-}
-*/
 
 
 void Student::setName(const std::string& name) {

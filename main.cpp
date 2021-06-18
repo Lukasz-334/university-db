@@ -52,7 +52,9 @@ int main() {
             MyMenu.printContinue();
             break;
         case 6:
-            MyMenu.optNotImplemented();
+            MyMenu.printHeader();
+            bd2.sortPesel();
+            MyMenu.printContinue();
             break;
         case 7:
             MyMenu.optNotImplemented();

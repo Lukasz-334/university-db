@@ -18,11 +18,13 @@ public:
     void searchPeselInMenu();
 
     void sortSurname();
-   // void sortPesel();
+    void sortPesel();
     int searchIndex(const std::string&); 
 
     void del(const std::string&);
     void printDb();
 
     size_t getDbSize() const;
+
+    
 };
