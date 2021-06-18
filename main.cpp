@@ -57,8 +57,11 @@ int main() {
             MyMenu.printContinue();
             break;
         case 7:
-            MyMenu.optNotImplemented();
+            MyMenu.printHeader();
+            bd2.deleteStudInMenu();
+            MyMenu.printContinue();
             break;
+
         case 8:
             MyMenu.optNotImplemented();
             break;

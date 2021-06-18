@@ -1,6 +1,7 @@
 #include "db.hpp"
 #include <iostream> 
 #include <string>
+#include <vector>
 #include "student.hpp"
 
 size_t Db::getDbSize() const {
@@ -56,6 +57,7 @@ void Db::addStudent() {
         } else {
             std::cout << "\n Student not added. Wrong PESEL !\n";
         }
+
     } else {
             std::cout << "\n Student with this PESEL already exists!\n";
     }
@@ -65,8 +67,7 @@ void Db::addStudent() {
 // }
 // void Db::sort(size_t pesel) {
 // }
-// void Db::del(size_t index) {
-// }
+
 void Db::printDb() {
     if (db_.size() > 0) {
         for (auto& person1 : db_) {
@@ -120,19 +121,6 @@ void Db::searchPeselInMenu() {
     searchPesel(tmp_str);
 }
 
-// int Db::searchIndex(const size_t index2) {
-//     int nr_index = -1;
-
-//     for (int i = 0; i < Db::db_.size(); i++) {
-//         if (db_[i].getIndex() == index2) {
-//             nr_index = i;
-//             return nr_index;
-//         }
-//     }
-
-//     return nr_index;
-  
-
 
 void Db::sortSurname() 
 {
@@ -145,4 +133,5 @@ void Db::sortPesel()
    {
         return a.getPesel()<b.getPesel();
    });
+
 }

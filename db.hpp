@@ -2,9 +2,6 @@
 #include <string>
 #include <vector>
 #include "student.hpp"
-
-// Wyświetlanie całej bazy danych zrobie w interfejsie
-
 class Db {
 public:
     std::vector<Student> db_;
@@ -14,14 +11,12 @@ public:
     void addStudent();
     void searchSurname(const std::string&);
     void searchSurnameInMenu();
-    bool searchPesel(const std::string&);
     void searchPeselInMenu();
-
+    bool searchPesel(const std::string&);
+    void deleteStud(std::string index);
+    void deleteStudInMenu();
     void sortSurname();
     void sortPesel();
-    int searchIndex(const std::string&); 
-
-    void del(const std::string&);
     void printDb();
 
     size_t getDbSize() const;

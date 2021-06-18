@@ -10,7 +10,7 @@ private:
     std::string address_;
     std::string index_;
     std::string pesel_;
-    std::string gender_;  //Not Specified Male Female Non-Binary
+    std::string gender_; 
 
 public:
     Student();
@@ -30,6 +30,6 @@ public:
     std::string getPesel() const;
     std::string getGender() const;
     void printPersonality();
-    bool operator<(const Student& student_a);
-    
-};
+
+//     bool operator<(const Student& student_a){;
+// };
