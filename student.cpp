@@ -8,12 +8,22 @@ Student::Student(std::string name, std::string surname, std::string address, std
     : name_(name), surname_(surname), address_(address), index_(index), pesel_(pesel), gender_(gender) {
 }
 
-bool Student::operator<(const Student& a)
+bool Student::operator<(const Student& student_a)
 {
 
-return a.getSurname()<surname_;
+return student_a.getSurname()>surname_;
 
 }
+/*
+bool Student::operator<(const Student& student_b)
+
+{
+
+return student_b.getPesel()<pesel_;
+
+}
+*/
+
 
 void Student::setName(const std::string& name) {
     name_ = name;
@@ -52,6 +62,10 @@ std::string Student::getGender() const {
     return gender_;
 }
 
+std::string Student::getPesel() const{
+    return pesel_;
+}
+
 void Student::printPersonality() {
     std::cout << "--------------------\n"
                  "Name: " + name_ + "\n"
@@ -59,5 +73,5 @@ void Student::printPersonality() {
                  "Address: " + address_ + "\n"
                  "Index: " + index_ + "\n"
                  "PESEL: " + pesel_+ "\n"
-                 "Gender: " + pesel_+ "\n";
+                 "Gender: " + gender_+ "\n";
 }

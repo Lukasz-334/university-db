@@ -18,7 +18,9 @@ public:
     void searchPeselInMenu();
 
     void sortSurname();
+   // void sortPesel();
     int searchIndex(const std::string&); 
+
     void del(const std::string&);
     void printDb();
 

@@ -30,5 +30,6 @@ public:
     std::string getPesel() const;
     std::string getGender() const;
     void printPersonality();
-    bool operator<(const Student& a);
+    bool operator<(const Student& student_a);
+    //bool operator<(const Student& student_b);
 };

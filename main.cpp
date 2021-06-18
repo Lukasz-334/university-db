@@ -47,7 +47,9 @@ int main() {
             MyMenu.printContinue();
             break;
         case 5:
-            MyMenu.optNotImplemented();
+            MyMenu.printHeader();
+            bd2.sortSurname();
+            MyMenu.printContinue();
             break;
         case 6:
             MyMenu.optNotImplemented();

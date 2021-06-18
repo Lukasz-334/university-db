@@ -137,4 +137,9 @@ void Db::sortSurname()
 {
     std::sort(db_.begin(), db_.end());
 }
-
+/*
+void Db::sortPesel()
+{
+   std::sort(db_.begin(), db_.end());
+}
+*/
