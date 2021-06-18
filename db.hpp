@@ -15,12 +15,12 @@ public:
     void addStudent();
     void searchSurname(const std::string&);
     void searchSurnameInMenu();
-    void searchPesel(const size_t);
+    bool searchPesel(const std::string&);
     void searchPeselInMenu();
-    int searchIndex(const size_t);
-    void sort(const std::string&);
-    void sort(size_t);
-    void del(size_t);
+    int searchIndex(const std::string&);
+    // void sort(const std::string&);
+    // void sort(const std::string&);
+    void del(const std::string&);
     void printDb();
 
     size_t getDbSize() const;
