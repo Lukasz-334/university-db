@@ -5,7 +5,7 @@
 class Db {
 public:
     std::vector<Student> db_;
-
+    
 public:
     bool checkPesel(size_t);
     void addStudent();
@@ -13,11 +13,13 @@ public:
     void searchSurnameInMenu();
     void searchPeselInMenu();
     bool searchPesel(const std::string&);
-    // void sort(const std::string&);
-    // void sort(const std::string&);
     void deleteStud(std::string index);
     void deleteStudInMenu();
+    void sortSurname();
+    void sortPesel();
     void printDb();
 
     size_t getDbSize() const;
+
+    
 };

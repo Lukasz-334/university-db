@@ -47,16 +47,21 @@ int main() {
             MyMenu.printContinue();
             break;
         case 5:
-            MyMenu.optNotImplemented();
+            MyMenu.printHeader();
+            bd2.sortSurname();
+            MyMenu.printContinue();
             break;
         case 6:
-            MyMenu.optNotImplemented();
+            MyMenu.printHeader();
+            bd2.sortPesel();
+            MyMenu.printContinue();
             break;
         case 7:
             MyMenu.printHeader();
             bd2.deleteStudInMenu();
             MyMenu.printContinue();
             break;
+
         case 8:
             MyMenu.optNotImplemented();
             break;

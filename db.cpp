@@ -1,5 +1,5 @@
 #include "db.hpp"
-#include <iostream>
+#include <iostream> 
 #include <string>
 #include <vector>
 #include "student.hpp"
@@ -57,32 +57,16 @@ void Db::addStudent() {
         } else {
             std::cout << "\n Student not added. Wrong PESEL !\n";
         }
+
     } else {
-        std::cout << "\n Student with this PESEL already exists!\n";
+            std::cout << "\n Student with this PESEL already exists!\n";
     }
 }
 
 // void Db::sort(const std::string& surname) {
 // }
 // void Db::sort(size_t pesel) {
-// // }
-
-void Db::deleteStud(std::string index) {
-    bool studNotFound = true;
-    for (std::vector<Student>::iterator it = db_.begin(); it < db_.end(); ++it) {
-        if (it->getIndex() == index) {
-            std::cout << "Student:\n";
-            it->printPersonality();
-            db_.erase(it);
-            studNotFound = false;
-
-            std::cout << "\nStudent deleted.\n";
-        }
-    }
-    if (studNotFound) {
-        std::cout << "Index " << index << " not found.\n";
-    }
-}
+// }
 
 void Db::printDb() {
     if (db_.size() > 0) {
@@ -96,6 +80,7 @@ void Db::printDb() {
 void Db::searchSurname(const std::string& surname) {
     bool studNotFound = true;
     std::cout << "Searching by surname: " << surname << std::endl;
+
     for (auto person1 : db_) {
         if (person1.getSurname() == surname) {
             person1.printPersonality();
@@ -106,19 +91,11 @@ void Db::searchSurname(const std::string& surname) {
         std::cout << "Not found.\n";
     }
 }
-
 void Db::searchSurnameInMenu() {
     std::string tmp_str;
     std::cout << "Please enter surname: ";
     std::cin >> tmp_str;
     searchSurname(tmp_str);
-}
-
-void Db::deleteStudInMenu() {
-    std::string tmp_str;
-    std::cout << "Please enter index number: ";
-    std::cin >> tmp_str;
-    deleteStud(tmp_str);
 }
 
 bool Db::searchPesel(const std::string& pesel) {
@@ -142,4 +119,19 @@ void Db::searchPeselInMenu() {
     std::cout << "Please enter PESEL: ";
     std::cin >> tmp_str;
     searchPesel(tmp_str);
+}
+
+
+void Db::sortSurname() 
+{
+    std::sort(db_.begin(), db_.end());
+}
+
+void Db::sortPesel()
+{
+   std::sort(db_.begin(), db_.end(),[](Student a, Student b) 
+   {
+        return a.getPesel()<b.getPesel();
+   });
+
 }
