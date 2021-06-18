@@ -2,18 +2,6 @@
 #include <iostream>
 #include "student.hpp"
 
-Db::Db(){};
-
-Db::Db(const Student& person) {
-    db_.push_back(person);
-}
-
-Db::Db(std::vector<Student>& db) {
-    for (auto st : db) {
-        db_.push_back(st);
-    }
-}
-
 size_t Db::getDbSize() const {
     return db_.size();
 }
@@ -32,64 +20,71 @@ bool Db::checkPesel(size_t pesel) {
     return ((sum > 0) && (sum % 10 == 0));
 }
 
-bool Db::addStudent() {
-    bool echo = true;
+void Db::addStudent() {
     Student tmp_stud;
     std::string tmp_str;  //tymczasowy string
-    size_t tmp_int;       //tymczasowy unsint
     size_t tmp_size;      // to zmienne na chwile
     std::cout << "\n Name: ";
     std::cin >> tmp_str;
-    if (echo) {
-        std::cout << tmp_str << '\n';
-    }
     tmp_stud.setName(tmp_str);
     std::cout << " Surname: ";
     std::cin >> tmp_str;
-    if (echo) {
-        std::cout << tmp_str << '\n';
-    }
     tmp_stud.setSurname(tmp_str);
     std::cout << " Address: ";
     std::cin >> tmp_str;
-    if (echo) {
-        std::cout << tmp_str << '\n';
-    }
     tmp_stud.setAddress(tmp_str);
     std::cout << " Index: ";
-    std::cin >> tmp_int;
-    if (echo) {
-        std::cout << tmp_int << '\n';
+    std::cin >> tmp_str;
+    try {
+        tmp_size = std::stod(tmp_str);  //zmiana na int
+    } catch (...) {
+        tmp_size = 0;
     }
-    tmp_stud.setIndex(tmp_int);
+
+    tmp_stud.setIndex(tmp_size);
     std::cout << " Gender: ";
     std::cin >> tmp_str;
-    if (echo) {
-        std::cout << tmp_str << '\n';
-    }
     tmp_stud.setGender(tmp_str);
     std::cout << " PESEL: ";
-    std::cin >> tmp_size;
-    if (echo) {
-        std::cout << tmp_size << '\n';
+    std::cin >> tmp_str;
+    try {
+        tmp_size = std::stod(tmp_str);
+    } catch (...) {
+        tmp_size = 0;
     }
 
     if (checkPesel(tmp_size)) {
         tmp_stud.setPesel(tmp_size);
         db_.emplace_back(tmp_stud);
-        return true;
+        std::cout << "Student added.\n";
+        std::cout << "Number of student in Database: " << getDbSize() << '\n';
     } else {
-        std::cout << "\n Wrong PESEL !\n";
-        return false;
+        std::cout << "\n Student not added. Wrong PESEL !\n";
     }
 }
 
+// void Db::sort(const std::string& surname) {
+// }
+// void Db::sort(size_t pesel) {
+// }
+// void Db::del(size_t index) {
+// }
+void Db::printDb() {
+    if (db_.size() > 0) {
+        for (auto& person1 : db_) {
+            person1.printPersonality();
+        }
+    } else {
+        std::cout << "No records in database.\n";
+    }
+}
 void Db::searchSurname(const std::string& surname) {
     bool studNotFound = true;
     std::cout << "Searching by surname: " << surname << std::endl;
-    for (auto person1 : Db::db_) {
+
+    for (auto person1 : db_) {
         if (person1.getSurname() == surname) {
-            //person1.personalData();
+            person1.printPersonality();
             studNotFound = false;
         }
     }
@@ -98,13 +93,19 @@ void Db::searchSurname(const std::string& surname) {
     }
 }
 
+void Db::searchSurnameInMenu() {
+    std::string tmp_str;
+    std::cout << "Please enter surname: ";
+    std::cin >> tmp_str;
+    searchSurname(tmp_str);
+}
+
 void Db::searchPesel(const size_t pesel) {
     bool peselNotFound = true;
     std::cout << "Searching by pesel: " << pesel << '\n';
-
-    for (auto person1 : Db::db_) {
+    for (auto person1 : db_) {
         if (person1.getPesel() == pesel) {
-            //person1.personalData();
+            person1.printPersonality();
             peselNotFound = false;
             break;
         }
@@ -112,26 +113,42 @@ void Db::searchPesel(const size_t pesel) {
     if (peselNotFound) {
         std::cout << "Not found.\n";
     }
+
 }
-
-int Db::searchIndex(const size_t index2) {
-    int nr_index = -1;
-
-    for (int i = 0; i < Db::db_.size(); i++) {
-        if (db_[i].getIndex() == index2) {
-            nr_index = i;
-            return nr_index;
-        }
+void Db::searchPeselInMenu() {
+    std::string tmp_str;
+    size_t tmp_size;
+    std::cout << "Please enter PESEL: ";
+    std::cin >> tmp_str;    
+    try {
+        tmp_size = std::stod(tmp_str);
+    } catch (...) {
+        tmp_size = 0;
     }
-
-    return nr_index;
+    searchPesel(tmp_size);
 }
 
-void Db::sortSurname() {
+// int Db::searchIndex(const size_t index2) {
+//     int nr_index = -1;
+
+//     for (int i = 0; i < Db::db_.size(); i++) {
+//         if (db_[i].getIndex() == index2) {
+//             nr_index = i;
+//             return nr_index;
+//         }
+//     }
+
+//     return nr_index;
+// }
+
+
+void Db::sortSurname() 
+{
     std::sort(db_.begin(), db_.end());
 }
-*/
+
 // void Db::sort(size_t pesel) {
 // }
 // void Db::del(size_t index) {
 // }
+

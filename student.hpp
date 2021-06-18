@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <string>
-
+#include <algorithm>
 class Student {
 private:
     std::string name_;
@@ -13,8 +13,10 @@ private:
     std::string gender_;  //Not Specified Male Female Non-Binary
 
 public:
-    Student(std::string name = "name", std::string surname = "surname", std::string address_ = "address", size_t index = 1234, size_t pesel = 12345678910, std::string gender = "G");
 
+    Student();
+    Student(std::string, std::string, std::string, size_t, size_t, std::string);
+ 
     void setName(const std::string&);
     void setSurname(const std::string&);
     void setAddress(const std::string&);
@@ -28,4 +30,6 @@ public:
     size_t getIndex() const;
     size_t getPesel() const;
     std::string getGender() const;
+    void printPersonality();
+    bool operator<(const Student& a);
 };

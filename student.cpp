@@ -1,8 +1,21 @@
 #include "student.hpp"
 #include "db.hpp"
 
+Student::Student() {
+}
+
 Student::Student(std::string name, std::string surname, std::string address, size_t index, size_t pesel, std::string gender)
-    : name_(name), surname_(surname), address_(address), index_(index), pesel_(pesel), gender_(gender) {}
+    : name_(name), surname_(surname), address_(address), index_(index), pesel_(pesel), gender_(gender) {
+}
+
+bool Student::operator<(const Student& a)
+{
+
+return a.getSurname()<surname_;
+
+}
+
+
 
 void Student::setName(const std::string& name) {
     name_ = name;
@@ -40,4 +53,14 @@ size_t Student::getPesel() const {
 }
 std::string Student::getGender() const {
     return gender_;
+}
+
+void Student::printPersonality() {
+    std::cout << "--------------------\n"
+                 "Name: " + name_ + "\n"
+                 "Surname: " + surname_ + "\n"
+                 "Address: " + address_ + "\n"
+                 "Index: " + std::to_string(index_) + "\n"
+                 "PESEL: " + std::to_string(pesel_)+ "\n"
+                 "Gender: " + std::to_string(pesel_)+ "\n";
 }
