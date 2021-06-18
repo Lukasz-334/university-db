@@ -4,10 +4,9 @@
 Student::Student() {
 }
 
-Student::Student(std::string name, std::string surname, std::string address, size_t index, size_t pesel, std::string gender)
+Student::Student(std::string name, std::string surname, std::string address, std::string index, std::string pesel, std::string gender)
     : name_(name), surname_(surname), address_(address), index_(index), pesel_(pesel), gender_(gender) {
 }
-
 
 void Student::setName(const std::string& name) {
     name_ = name;
@@ -18,13 +17,13 @@ void Student::setSurname(const std::string& surname) {
 void Student::setAddress(const std::string& address) {
     address_ = address;
 }
-void Student::setIndex(size_t index) {
+void Student::setIndex(const std::string& index) {
     index_ = index;
 }
-void Student::setPesel(size_t pesel) {
+void Student::setPesel(const std::string& pesel) {
     pesel_ = pesel;
 }
-void Student::setGender(std::string gender) {
+void Student::setGender(const std::string& gender) {
     gender_ = gender;
 }
 
@@ -37,12 +36,11 @@ std::string Student::getSurname() const {
 std::string Student::getAddress() const {
     return address_;
 }
-size_t Student::getIndex() const {
-    return index_;
+
+std::string Student::getIndex() const {
+  return index_;
 }
-size_t Student::getPesel() const {
-    return pesel_;
-}
+
 std::string Student::getGender() const {
     return gender_;
 }
@@ -52,7 +50,7 @@ void Student::printPersonality() {
                  "Name: " + name_ + "\n"
                  "Surname: " + surname_ + "\n"
                  "Address: " + address_ + "\n"
-                 "Index: " + std::to_string(index_) + "\n"
-                 "PESEL: " + std::to_string(pesel_)+ "\n"
-                 "Gender: " + std::to_string(pesel_)+ "\n";
+                 "Index: " + index_ + "\n"
+                 "PESEL: " + pesel_+ "\n"
+                 "Gender: " + pesel_+ "\n";
 }
