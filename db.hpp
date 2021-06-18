@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
+#include <algorithm>
 #include "student.hpp"
 
 // Wyświetlanie całej bazy danych zrobie w interfejsie
@@ -8,7 +9,7 @@
 class Db {
 public:
     std::vector<Student> db_;
-
+    
 public:
     bool checkPesel(size_t);
     void addStudent();

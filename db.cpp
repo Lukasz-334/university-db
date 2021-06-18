@@ -1,7 +1,18 @@
 #include "db.hpp"
-#include <iostream>
-#include <string>
 #include "student.hpp"
+#include <iostream>
+
+Db::Db(){};
+
+Db::Db(const Student& person) {
+    db_.push_back(person);
+}
+
+Db::Db(std::vector<Student>& db) {
+    for (auto st : db) {
+        db_.push_back(st);
+    }
+}
 
 size_t Db::getDbSize() const {
     return db_.size();
@@ -92,6 +103,7 @@ void Db::searchSurname(const std::string& surname) {
         std::cout << "Not found.\n";
     }
 }
+
 void Db::searchSurnameInMenu() {
     std::string tmp_str;
     std::cout << "Please enter surname: ";
@@ -104,7 +116,7 @@ void Db::searchPesel(const size_t pesel) {
     std::cout << "Searching by pesel: " << pesel << '\n';
     for (auto person1 : db_) {
         if (person1.getPesel() == pesel) {
-            person1.printPersonality();
+            person1.printPersonality()
             peselNotFound = false;
             break;
         }
@@ -112,6 +124,7 @@ void Db::searchPesel(const size_t pesel) {
     if (peselNotFound) {
         std::cout << "Not found.\n";
     }
+
 }
 void Db::searchPeselInMenu() {
     std::string tmp_str;
@@ -138,3 +151,14 @@ void Db::searchPeselInMenu() {
 
 //     return nr_index;
 // }
+
+/*
+void Db::sortSurname() {
+    std::sort(db_.begin(), db_.end());
+}
+*/
+// void Db::sort(size_t pesel) {
+// }
+// void Db::del(size_t index) {
+// }
+

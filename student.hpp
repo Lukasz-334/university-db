@@ -13,16 +13,17 @@ private:
     std::string gender_;  //Not Specified Male Female Non-Binary
 
 public:
+
     Student();
     Student(std::string, std::string, std::string, size_t, size_t, std::string);
-    
+ 
     void setName(const std::string&);
     void setSurname(const std::string&);
     void setAddress(const std::string&);
     void setIndex(size_t);
     void setPesel(size_t);
     void setGender(std::string);
-
+    void personalData();
     std::string getName() const;
     std::string getSurname() const;
     std::string getAddress() const;

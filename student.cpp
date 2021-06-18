@@ -8,6 +8,7 @@ Student::Student(std::string name, std::string surname, std::string address, siz
     : name_(name), surname_(surname), address_(address), index_(index), pesel_(pesel), gender_(gender) {
 }
 
+
 void Student::setName(const std::string& name) {
     name_ = name;
 }
