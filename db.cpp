@@ -1,5 +1,5 @@
 #include "db.hpp"
-#include <iostream> 
+#include <iostream>
 #include <string>
 #include <vector>
 #include "student.hpp"
@@ -59,7 +59,7 @@ void Db::addStudent() {
         }
 
     } else {
-            std::cout << "\n Student with this PESEL already exists!\n";
+        std::cout << "\n Student with this PESEL already exists!\n";
     }
 }
 
@@ -95,8 +95,6 @@ void Db::deleteStudInMenu() {
     std::cin >> tmp_str;
     deleteStud(tmp_str);
 }
-
-
 
 void Db::searchSurname(const std::string& surname) {
     bool studNotFound = true;
@@ -143,17 +141,25 @@ void Db::searchPeselInMenu() {
     searchPesel(tmp_str);
 }
 
-
-void Db::sortSurname() 
-{
+void Db::sortSurname() {
     std::sort(db_.begin(), db_.end());
 }
 
-void Db::sortPesel()
-{
-   std::sort(db_.begin(), db_.end(),[](Student a, Student b) 
-   {
-        return a.getPesel()<b.getPesel();
-   });
+void Db::sortPesel() {
+    std::sort(db_.begin(), db_.end(), [](const Student& a, const Student& b) {
+        std::string x = a.getPesel();
+        std::string y = b.getPesel();
+        if ((x[0] == '0') || (x[0] == '1')) {
+            x += 1;
+        }
+        if ((y[0] == '0') || (y[0] == '1')) {
+            y += 1;
+        }
 
+        if (x.size() == y.size()) {
+            return x < y;
+        } else {
+            return x.size() < y.size();
+        }
+    });
 }
