@@ -13,7 +13,7 @@ public:
     void searchSurnameInMenu();
     void searchPeselInMenu();
     bool searchPesel(const std::string&);
-    void deleteStud(std::string index);
+    void deleteStud(const std::string&);
     void deleteStudInMenu();
     void sortSurname();
     void sortPesel();

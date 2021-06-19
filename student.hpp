@@ -31,5 +31,6 @@ public:
     std::string getGender() const;
     void printPersonality();
 
-//     bool operator<(const Student& student_a){;
-// };
+    bool operator<(const Student& student_a);
+
+};

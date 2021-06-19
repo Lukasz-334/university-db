@@ -63,11 +63,6 @@ void Db::addStudent() {
     }
 }
 
-// void Db::sort(const std::string& surname) {
-// }
-// void Db::sort(size_t pesel) {
-// }
-
 void Db::printDb() {
     if (db_.size() > 0) {
         for (auto& person1 : db_) {
@@ -77,6 +72,32 @@ void Db::printDb() {
         std::cout << "No records in database.\n";
     }
 }
+
+void Db::deleteStud(const std::string& index) {
+    bool studNotFound = true;
+    for (std::vector<Student>::iterator it = db_.begin(); it < db_.end(); ++it) {
+        if (it->getIndex() == index) {
+            std::cout << "Student:\n";
+            it->printPersonality();
+            db_.erase(it);
+            studNotFound = false;
+            std::cout << "\nStudent deleted.\n";
+        }
+    }
+    if (studNotFound) {
+        std::cout << "Index " << index << " not found.\n";
+    }
+}
+
+void Db::deleteStudInMenu() {
+    std::string tmp_str;
+    std::cout << "Please enter index number: ";
+    std::cin >> tmp_str;
+    deleteStud(tmp_str);
+}
+
+
+
 void Db::searchSurname(const std::string& surname) {
     bool studNotFound = true;
     std::cout << "Searching by surname: " << surname << std::endl;
@@ -113,6 +134,7 @@ bool Db::searchPesel(const std::string& pesel) {
     }
     return peselNotFound;
 }
+
 void Db::searchPeselInMenu() {
     std::string tmp_str;
     size_t tmp_size;
