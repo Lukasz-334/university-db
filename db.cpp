@@ -1,8 +1,9 @@
 #include "db.hpp"
+#include <algorithm>
 #include <iostream>
 #include <string>
 #include <vector>
-#include <algorithm>
+#include <iomanip>
 #include "student.hpp"
 
 size_t Db::getDbSize() const {
@@ -67,12 +68,6 @@ void Db::addStudent(Student& stud) {
     db_.emplace_back(stud);
 }
 
-// void Db::sort(const std::string& surname) {
-// }
-
-// void Db::sort(size_t pesel) {
-// // }
-
 void Db::deleteStud(std::string index) {
     bool studNotFound = true;
     for (std::vector<Student>::iterator it = db_.begin(); it < db_.end(); ++it) {
@@ -90,10 +85,32 @@ void Db::deleteStud(std::string index) {
 }
 
 void Db::printDb() {
+    int nr_stud = 1;
+    int st = 20;
     if (db_.size() > 0) {
+        std::cout << "     ";
+        std::cout << std::left;
+        std::cout << std::setw(st) << "[      NAME       ]";
+        std::cout << std::setw(st) << "[      SURNAME    ]";
+        std::cout << std::setw(st) << "[      ADDRESS    ]";
+        std::cout << std::setw(st) << "[      INDEX      ]";
+        std::cout << std::setw(st) << "[      PESEL      ]";
+        std::cout << std::setw(st) << "[      GENDER     ]";
+
         for (auto& person1 : db_) {
-            person1.printPersonality();
+            std::cout << std::endl;
+            std::cout << std::left;
+            std::cout << std::setw(5) << nr_stud;
+            std::cout << std::left;
+            std::cout << std::setw(st) << " " + person1.getName();
+            std::cout << std::setw(st) << " " + person1.getSurname();
+            std::cout << std::setw(st) << " " + person1.getAddress();
+            std::cout << std::setw(st) << " " + person1.getIndex();
+            std::cout << std::setw(st) << " " + person1.getPesel();
+            std::cout << std::setw(st) << " " + person1.getGender();
+            nr_stud++;
         }
+        std::cout << '\n';
     } else {
         std::cout << "No records in database.\n";
     }
@@ -155,66 +172,71 @@ void Db::searchPeselInMenu() {
 /* https://lukasjoswiak.com/serializing-stdstring/ */
 /* *************************************************/
 void Db::saveDbToFile(const std::string& fileDB) {
-    std::string::size_type length;
+    size_t length;
     std::ofstream ofs(fileDB, std::ios::binary);
     std::cout << "Saving " << db_.size() << " students to file: " << fileDB << '\n';
     for (auto person1 : db_) {
         length = person1.getName().length();
-        ofs.write(reinterpret_cast<const char*>(&length), sizeof(length));  // the first 8 bytes are used to encode the length of the string
-        ofs.write(reinterpret_cast<const char*>(person1.getName().data()), length);     // encode the string itself
+        ofs.write(reinterpret_cast<const char*>(&length), sizeof(length));           // the first 8 bytes are used to encode the length of the string
+        ofs.write(reinterpret_cast<const char*>(person1.getName().data()), length);  // encode the string itself
+
         length = person1.getSurname().length();
-        ofs.write(reinterpret_cast<const char*>(&length), sizeof(length));  // the first 8 bytes are used to encode the length of the string
+        ofs.write(reinterpret_cast<const char*>(&length), sizeof(length));              // the first 8 bytes are used to encode the length of the string
         ofs.write(reinterpret_cast<const char*>(person1.getSurname().data()), length);  // encode the string itself
+
         length = person1.getAddress().length();
-        ofs.write(reinterpret_cast<const char*>(&length), sizeof(length));  // the first 8 bytes are used to encode the length of the string
+        ofs.write(reinterpret_cast<const char*>(&length), sizeof(length));              // the first 8 bytes are used to encode the length of the string
         ofs.write(reinterpret_cast<const char*>(person1.getAddress().data()), length);  // encode the string itself
+
         length = person1.getIndex().length();
-        ofs.write(reinterpret_cast<const char*>(&length), sizeof(length));  // the first 8 bytes are used to encode the length of the string
-        ofs.write(reinterpret_cast<const char*>(person1.getIndex().data()), length);    // encode the string itself
+        ofs.write(reinterpret_cast<const char*>(&length), sizeof(length));            // the first 8 bytes are used to encode the length of the string
+        ofs.write(reinterpret_cast<const char*>(person1.getIndex().data()), length);  // encode the string itself
+
         length = person1.getPesel().length();
-        ofs.write(reinterpret_cast<const char*>(&length), sizeof(length));  // the first 8 bytes are used to encode the length of the string
-        ofs.write(reinterpret_cast<const char*>(person1.getPesel().data()), length);    // encode the string itself
+        ofs.write(reinterpret_cast<const char*>(&length), sizeof(length));            // the first 8 bytes are used to encode the length of the string
+        ofs.write(reinterpret_cast<const char*>(person1.getPesel().data()), length);  // encode the string itself
+
         length = person1.getGender().length();
-        ofs.write(reinterpret_cast<const char*>(&length), sizeof(length));  // the first 8 bytes are used to encode the length of the string
-        ofs.write(reinterpret_cast<const char*>(person1.getGender().data()), length);   // encode the string itself
+        ofs.write(reinterpret_cast<const char*>(&length), sizeof(length));             // the first 8 bytes are used to encode the length of the string
+        ofs.write(reinterpret_cast<const char*>(person1.getGender().data()), length);  // encode the string itself
     }
     ofs.close();
 }
 
 void Db::loadDbFromFile(const std::string& fileDB) {
     std::ifstream ifs(fileDB, std::ios::binary);
-    std::string::size_type length;
+    size_t length;
     std::string tmp_str;
     Student tmp_stud;
-    while (ifs.peek()!=EOF) { 
+    while (ifs.peek() != EOF) {
         ifs.read(reinterpret_cast<char*>(&length), sizeof(length));
         tmp_str.resize(length);
-        ifs.read(reinterpret_cast<char*>((void *)tmp_str.data()), length);
+        ifs.read(reinterpret_cast<char*>((void*)tmp_str.data()), length);
         tmp_stud.setName(tmp_str);
 
         ifs.read(reinterpret_cast<char*>(&length), sizeof(length));
         tmp_str.resize(length);
-        ifs.read(reinterpret_cast<char*>((void *)tmp_str.data()), length);
+        ifs.read(reinterpret_cast<char*>((void*)tmp_str.data()), length);
         tmp_stud.setSurname(tmp_str);
 
         ifs.read(reinterpret_cast<char*>(&length), sizeof(length));
         tmp_str.resize(length);
-        ifs.read(reinterpret_cast<char*>((void *)tmp_str.data()), length);
+        ifs.read(reinterpret_cast<char*>((void*)tmp_str.data()), length);
         tmp_stud.setAddress(tmp_str);
 
         ifs.read(reinterpret_cast<char*>(&length), sizeof(length));
         tmp_str.resize(length);
-        ifs.read(reinterpret_cast<char*>((void *)tmp_str.data()), length);
+        ifs.read(reinterpret_cast<char*>((void*)tmp_str.data()), length);
         tmp_stud.setIndex(tmp_str);
 
         ifs.read(reinterpret_cast<char*>(&length), sizeof(length));
         tmp_str.resize(length);
-        ifs.read(reinterpret_cast<char*>((void *)tmp_str.data()), length);
+        ifs.read(reinterpret_cast<char*>((void*)tmp_str.data()), length);
         tmp_stud.setPesel(tmp_str);
 
         ifs.read(reinterpret_cast<char*>(&length), sizeof(length));
         tmp_str.resize(length);
-        ifs.read(reinterpret_cast<char*>((void *)tmp_str.data()), length);
+        ifs.read(reinterpret_cast<char*>((void*)tmp_str.data()), length);
         tmp_stud.setGender(tmp_str);
 
         addStudent(tmp_stud);
