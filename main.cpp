@@ -47,25 +47,26 @@ int main() {
             MyMenu.printContinue();
             break;
         case 5:
-            MyMenu.optNotImplemented();
+            MyMenu.printHeader();
+            bd2.sortSurname();
+            MyMenu.printContinue();
             break;
         case 6:
-            MyMenu.optNotImplemented();
+            MyMenu.printHeader();
+            bd2.sortPesel();
+            MyMenu.printContinue();
             break;
         case 7:
             MyMenu.printHeader();
             bd2.deleteStudInMenu();
             MyMenu.printContinue();
             break;
+
         case 8:
-            MyMenu.printHeader();
-            bd2.saveDbToFile("db.dat");
-            MyMenu.printContinue();
+            MyMenu.optNotImplemented();
             break;
         case 9:
-            MyMenu.printHeader();
-            bd2.loadDbFromFile("db.dat");
-            MyMenu.printContinue();
+            MyMenu.optNotImplemented();
             break;
         case 10:
             MyMenu.setDoNotExit(false);
