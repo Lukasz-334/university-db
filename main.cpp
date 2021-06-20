@@ -10,7 +10,7 @@ int main() {
 
     Menu MyMenu(
         "+----------------------------------+\n"
-        "+ Academic Students Database +\n"
+        "+    Academic Students Database    +\n"
         "+----------------------------------+\n");
 
     MyMenu.addItem("Add student");
