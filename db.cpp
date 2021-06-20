@@ -57,22 +57,23 @@ void Db::addStudent() {
         } else {
             std::cout << "\n Student not added. Wrong PESEL !\n";
         }
+
     } else {
         std::cout << "\n Student with this PESEL already exists!\n";
     }
 }
 
-void Db::addStudent(Student& stud) {
-    db_.emplace_back(stud);
+void Db::printDb() {
+    if (db_.size() > 0) {
+        for (auto& person1 : db_) {
+            person1.printPersonality();
+        }
+    } else {
+        std::cout << "No records in database.\n";
+    }
 }
 
-// void Db::sort(const std::string& surname) {
-// }
-
-// void Db::sort(size_t pesel) {
-// // }
-
-void Db::deleteStud(std::string index) {
+void Db::deleteStud(const std::string& index) {
     bool studNotFound = true;
     for (std::vector<Student>::iterator it = db_.begin(); it < db_.end(); ++it) {
         if (it->getIndex() == index) {
@@ -88,19 +89,17 @@ void Db::deleteStud(std::string index) {
     }
 }
 
-void Db::printDb() {
-    if (db_.size() > 0) {
-        for (auto& person1 : db_) {
-            person1.printPersonality();
-        }
-    } else {
-        std::cout << "No records in database.\n";
-    }
+void Db::deleteStudInMenu() {
+    std::string tmp_str;
+    std::cout << "Please enter index number: ";
+    std::cin >> tmp_str;
+    deleteStud(tmp_str);
 }
 
 void Db::searchSurname(const std::string& surname) {
     bool studNotFound = true;
     std::cout << "Searching by surname: " << surname << std::endl;
+
     for (auto person1 : db_) {
         if (person1.getSurname() == surname) {
             person1.printPersonality();
@@ -111,19 +110,11 @@ void Db::searchSurname(const std::string& surname) {
         std::cout << "Not found.\n";
     }
 }
-
 void Db::searchSurnameInMenu() {
     std::string tmp_str;
     std::cout << "Please enter surname: ";
     std::cin >> tmp_str;
     searchSurname(tmp_str);
-}
-
-void Db::deleteStudInMenu() {
-    std::string tmp_str;
-    std::cout << "Please enter index number: ";
-    std::cin >> tmp_str;
-    deleteStud(tmp_str);
 }
 
 bool Db::searchPesel(const std::string& pesel) {
@@ -150,75 +141,25 @@ void Db::searchPeselInMenu() {
     searchPesel(tmp_str);
 }
 
-/* *************************************************/
-/* Implementation based on idea from this blog:    */
-/* https://lukasjoswiak.com/serializing-stdstring/ */
-/* *************************************************/
-void Db::saveDbToFile(const std::string& fileDB) {
-    std::string::size_type length;
-    std::ofstream ofs(fileDB, std::ios::binary);
-    std::cout << "Saving " << db_.size() << " students to file: " << fileDB << '\n';
-    for (auto person1 : db_) {
-        length = person1.getName().length();
-        ofs.write(reinterpret_cast<const char*>(&length), sizeof(length));  // the first 8 bytes are used to encode the length of the string
-        ofs.write(reinterpret_cast<const char*>(person1.getName().data()), length);     // encode the string itself
-        length = person1.getSurname().length();
-        ofs.write(reinterpret_cast<const char*>(&length), sizeof(length));  // the first 8 bytes are used to encode the length of the string
-        ofs.write(reinterpret_cast<const char*>(person1.getSurname().data()), length);  // encode the string itself
-        length = person1.getAddress().length();
-        ofs.write(reinterpret_cast<const char*>(&length), sizeof(length));  // the first 8 bytes are used to encode the length of the string
-        ofs.write(reinterpret_cast<const char*>(person1.getAddress().data()), length);  // encode the string itself
-        length = person1.getIndex().length();
-        ofs.write(reinterpret_cast<const char*>(&length), sizeof(length));  // the first 8 bytes are used to encode the length of the string
-        ofs.write(reinterpret_cast<const char*>(person1.getIndex().data()), length);    // encode the string itself
-        length = person1.getPesel().length();
-        ofs.write(reinterpret_cast<const char*>(&length), sizeof(length));  // the first 8 bytes are used to encode the length of the string
-        ofs.write(reinterpret_cast<const char*>(person1.getPesel().data()), length);    // encode the string itself
-        length = person1.getGender().length();
-        ofs.write(reinterpret_cast<const char*>(&length), sizeof(length));  // the first 8 bytes are used to encode the length of the string
-        ofs.write(reinterpret_cast<const char*>(person1.getGender().data()), length);   // encode the string itself
-    }
-    ofs.close();
+void Db::sortSurname() {
+    std::sort(db_.begin(), db_.end());
 }
 
-void Db::loadDbFromFile(const std::string& fileDB) {
-    std::ifstream ifs(fileDB, std::ios::binary);
-    std::string::size_type length;
-    std::string tmp_str;
-    Student tmp_stud;
-    while (ifs.peek()!=EOF) { 
-        ifs.read(reinterpret_cast<char*>(&length), sizeof(length));
-        tmp_str.resize(length);
-        ifs.read(reinterpret_cast<char*>((void *)tmp_str.data()), length);
-        tmp_stud.setName(tmp_str);
+void Db::sortPesel() {
+    std::sort(db_.begin(), db_.end(), [](const Student& a, const Student& b) {
+        std::string x = a.getPesel();
+        std::string y = b.getPesel();
+        if ((x[0] == '0') || (x[0] == '1')) {
+            x += 1;
+        }
+        if ((y[0] == '0') || (y[0] == '1')) {
+            y += 1;
+        }
 
-        ifs.read(reinterpret_cast<char*>(&length), sizeof(length));
-        tmp_str.resize(length);
-        ifs.read(reinterpret_cast<char*>((void *)tmp_str.data()), length);
-        tmp_stud.setSurname(tmp_str);
-
-        ifs.read(reinterpret_cast<char*>(&length), sizeof(length));
-        tmp_str.resize(length);
-        ifs.read(reinterpret_cast<char*>((void *)tmp_str.data()), length);
-        tmp_stud.setAddress(tmp_str);
-
-        ifs.read(reinterpret_cast<char*>(&length), sizeof(length));
-        tmp_str.resize(length);
-        ifs.read(reinterpret_cast<char*>((void *)tmp_str.data()), length);
-        tmp_stud.setIndex(tmp_str);
-
-        ifs.read(reinterpret_cast<char*>(&length), sizeof(length));
-        tmp_str.resize(length);
-        ifs.read(reinterpret_cast<char*>((void *)tmp_str.data()), length);
-        tmp_stud.setPesel(tmp_str);
-
-        ifs.read(reinterpret_cast<char*>(&length), sizeof(length));
-        tmp_str.resize(length);
-        ifs.read(reinterpret_cast<char*>((void *)tmp_str.data()), length);
-        tmp_stud.setGender(tmp_str);
-
-        addStudent(tmp_stud);
-    }
-    ifs.close();
-    std::cout << "Loaded " << db_.size() << " students from file: " << fileDB << '\n';
+        if (x.size() == y.size()) {
+            return x < y;
+        } else {
+            return x.size() < y.size();
+        }
+    });
 }
