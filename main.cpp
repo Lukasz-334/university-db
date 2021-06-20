@@ -20,8 +20,8 @@ int main() {
     MyMenu.addItem("Sort by surname");
     MyMenu.addItem("Sort by PESEL");
     MyMenu.addItem("Delete student");
-    MyMenu.addItem("Save to file");
-    MyMenu.addItem("Read from file");
+    MyMenu.addItem("Save DB to file");
+    MyMenu.addItem("Load DB from file");
     MyMenu.addItem("Exit");
 
     while (MyMenu.getDoNotExit()) {
@@ -61,12 +61,15 @@ int main() {
             bd2.deleteStudInMenu();
             MyMenu.printContinue();
             break;
-
         case 8:
-            MyMenu.optNotImplemented();
+            MyMenu.printHeader();
+            bd2.saveDbToFile("db.dat");
+            MyMenu.printContinue();
             break;
         case 9:
-            MyMenu.optNotImplemented();
+            MyMenu.printHeader();
+            bd2.loadDbFromFile("db.dat");
+            MyMenu.printContinue();
             break;
         case 10:
             MyMenu.setDoNotExit(false);
