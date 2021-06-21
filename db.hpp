@@ -26,6 +26,7 @@ public:
     void searchPeselInMenu();
     bool searchPesel(const std::string&);
     void sortSurname();
+    void changeToSmall(std::string&); 
     void sortPesel();
     void deleteStud(const std::string& index);
     void deleteStudInMenu();

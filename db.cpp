@@ -116,10 +116,22 @@ void Db::printDb() {
     }
 }
 
+void Db::changeToSmall(std::string& word) {
+    for (auto& sign : word) {
+        sign = tolower(sign);
+    }
+}
+
 bool Db::searchSurname(const std::string& surname) {
     bool studNotFound = true;
-    for (auto person1 : db_) {
-        if (person1.getSurname() == surname) {
+    std::string surnameA = surname;
+    std::string surnameB;
+    changeToSmall(surnameA);
+
+    for (auto& person1 : db_) {
+        surnameB = person1.getSurname();
+        changeToSmall(surnameB);
+        if (surnameA == surnameB) {
             person1.printPersonality();
             studNotFound = false;
         }
