@@ -99,15 +99,15 @@ void Db::printDb() {
 
         for (auto& person1 : db_) {
             std::cout << std::endl;
+            std::cout << std::right;
+            std::cout << std::setw(5) << nr_stud<<".   ";
             std::cout << std::left;
-            std::cout << std::setw(5) << nr_stud;
-            std::cout << std::left;
-            std::cout << std::setw(st) << " " + person1.getName();
-            std::cout << std::setw(st) << " " + person1.getSurname();
-            std::cout << std::setw(st) << " " + person1.getAddress();
-            std::cout << std::setw(st) << " " + person1.getIndex();
-            std::cout << std::setw(st) << " " + person1.getPesel();
-            std::cout << std::setw(st) << " " + person1.getGender();
+            std::cout << std::setw(st) << person1.getName();
+            std::cout << std::setw(st) << person1.getSurname();
+            std::cout << std::setw(st) << person1.getAddress();
+            std::cout << std::setw(st) << person1.getIndex();
+            std::cout << std::setw(st) << person1.getPesel();
+            std::cout << std::setw(st) << person1.getGender();
             nr_stud++;
         }
         std::cout << '\n';
