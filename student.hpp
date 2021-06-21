@@ -17,7 +17,6 @@ public:
 /* Costructors */
     
 /* Operators */
-    bool operator<(const Student&);
 
 /* Setters */
     void setName(const std::string&);

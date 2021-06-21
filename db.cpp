@@ -1,9 +1,9 @@
 #include "db.hpp"
 #include <algorithm>
+#include <iomanip>
 #include <iostream>
 #include <string>
 #include <vector>
-#include <iomanip>
 #include "student.hpp"
 
 size_t Db::getDbSize() const {
@@ -68,7 +68,7 @@ void Db::addStudent(Student& stud) {
     db_.emplace_back(stud);
 }
 
-void Db::deleteStud(std::string index) {
+void Db::deleteStud(const std::string& index) {
     bool studNotFound = true;
     for (std::vector<Student>::iterator it = db_.begin(); it < db_.end(); ++it) {
         if (it->getIndex() == index) {
@@ -246,8 +246,18 @@ void Db::loadDbFromFile(const std::string& fileDB) {
 }
 
 void Db::sortSurname() {
-    std::sort(db_.begin(), db_.end());
-    std::cout << "Database sorted by surname.\n";
+    std::sort(db_.begin(), db_.end(), [](const Student& a, const Student& b) {
+        std::string surnameX = a.getSurname();
+        std::string surnameY = b.getSurname();
+
+        for (auto& s : surnameX) {
+            s = tolower(s);
+        }
+        for (auto& s : surnameY) {
+            s = tolower(s);
+        }
+        return surnameX < surnameY;
+    });
 }
 
 void Db::sortPesel() {

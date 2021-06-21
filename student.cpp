@@ -1,10 +1,7 @@
 #include "student.hpp"
 #include "db.hpp"
 
-bool Student::operator<(const Student& stud)
-{
-    return stud.getSurname()>surname_;
-}
+
 void Student::setName(const std::string& name) {
     name_ = name;
 }

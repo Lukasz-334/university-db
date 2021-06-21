@@ -3,7 +3,7 @@
 #include <vector>
 #include "student.hpp"
 #include <fstream>
-
+#include <cctype>
 class Db {
 public:
 /* Private variables */
@@ -27,7 +27,7 @@ public:
     bool searchPesel(const std::string&);
     void sortSurname();
     void sortPesel();
-    void deleteStud(std::string index);
+    void deleteStud(const std::string& index);
     void deleteStudInMenu();
     void printDb();
     void saveDbToFile(const std::string&);
