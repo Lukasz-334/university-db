@@ -54,7 +54,7 @@ size_t Menu::printMenu() {
     printHeader();
 
     // Enumerate in print options
-    for (int i = 0; i < menuItems_.size(); i++) {
+    for (size_t i = 0; i < menuItems_.size(); i++) {
         std::cout << (i + 1)
                   << ".) "
                   << menuItems_[i]->getTitle()

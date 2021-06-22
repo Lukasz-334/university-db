@@ -181,7 +181,6 @@ bool Db::searchPesel(const std::string& pesel) {
 
 void Db::searchPeselInMenu() {
     std::string tmp_str;
-    size_t tmp_size;
     std::cout << "Please enter PESEL: ";
     std::cin >> tmp_str;
     std::cout << "Searching by pesel: " << tmp_str << '\n';
