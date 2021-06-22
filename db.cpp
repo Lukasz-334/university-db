@@ -1,7 +1,6 @@
 #include "db.hpp"
 #include <algorithm>
 #include <iomanip>
-#include <iostream>
 #include <string>
 #include <vector>
 #include "student.hpp"
@@ -26,8 +25,8 @@ bool Db::checkPesel(size_t pesel) {
 
 void Db::addStudent() {
     Student tmp_stud;
-    std::string tmp_str;  //tymczasowy string
-    size_t tmp_size;      // to zmienne na chwile
+    std::string tmp_str;
+    size_t tmp_size;
     std::cout << "\n Name: ";
     std::cin >> tmp_str;
     tmp_stud.setName(tmp_str);
@@ -65,7 +64,19 @@ void Db::addStudent() {
 }
 
 void Db::addStudent(Student& stud) {
-    db_.emplace_back(stud);
+    size_t tmp_size;
+    try {
+        tmp_size = std::stod(stud.getPesel());
+    } catch (...) {
+        tmp_size = 0;
+    }
+    if (checkPesel(tmp_size)) {
+        db_.emplace_back(stud);
+        std::cout << "Student added.\n";
+        std::cout << "Number of student in Database: " << getDbSize() << '\n';
+    } else {
+        std::cout << "Student not added. Wrong PESEL !\n";
+    }
 }
 
 void Db::deleteStud(const std::string& index) {
@@ -88,7 +99,7 @@ void Db::printDb() {
     int nr_stud = 1;
     int st = 20;
     if (db_.size() > 0) {
-        std::cout << "     ";
+        std::cout << "[ID] ";
         std::cout << std::left;
         std::cout << std::setw(st) << "[      NAME       ]";
         std::cout << std::setw(st) << "[      SURNAME    ]";
@@ -98,9 +109,9 @@ void Db::printDb() {
         std::cout << std::setw(st) << "[      GENDER     ]";
 
         for (auto& person1 : db_) {
-            std::cout << std::endl;
+            std::cout << '\n';
             std::cout << std::right;
-            std::cout << std::setw(5) << nr_stud<<".   ";
+            std::cout << std::setw(5) << nr_stud << ".   ";
             std::cout << std::left;
             std::cout << std::setw(st) << person1.getName();
             std::cout << std::setw(st) << person1.getSurname();
@@ -219,6 +230,7 @@ void Db::loadDbFromFile(const std::string& fileDB) {
     std::ifstream ifs(fileDB, std::ios::binary);
     size_t length;
     std::string tmp_str;
+    db_.clear();
     Student tmp_stud;
     while (ifs.peek() != EOF) {
         ifs.read(reinterpret_cast<char*>(&length), sizeof(length));

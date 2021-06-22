@@ -28,7 +28,7 @@ public:
     void sortSurname();
     void changeToSmall(std::string&); 
     void sortPesel();
-    void deleteStud(const std::string& index);
+    void deleteStud(const std::string&);
     void deleteStudInMenu();
     void printDb();
     void saveDbToFile(const std::string&);
