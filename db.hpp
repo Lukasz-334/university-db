@@ -5,7 +5,7 @@
 #include <fstream>
 #include <cctype>
 class Db {
-public:
+private:
 /* Private variables */
     std::vector<Student> db_;
 

@@ -28,22 +28,22 @@ void Db::addStudent() {
     std::string tmp_str;
     size_t tmp_size;
     std::cout << "\n Name: ";
-    std::cin >> tmp_str;
+    std::getline (std::cin, tmp_str);
     tmp_stud.setName(tmp_str);
     std::cout << " Surname: ";
-    std::cin >> tmp_str;
+    std::getline (std::cin, tmp_str);
     tmp_stud.setSurname(tmp_str);
     std::cout << " Address: ";
-    std::cin >> tmp_str;
+    std::getline (std::cin, tmp_str);
     tmp_stud.setAddress(tmp_str);
     std::cout << " Index: ";
-    std::cin >> tmp_str;
+    std::getline (std::cin, tmp_str);
     tmp_stud.setIndex(tmp_str);
     std::cout << " Gender: ";
-    std::cin >> tmp_str;
+    std::getline (std::cin, tmp_str);
     tmp_stud.setGender(tmp_str);
     std::cout << " PESEL: ";
-    std::cin >> tmp_str;
+    std::getline (std::cin, tmp_str);
     if (searchPesel(tmp_str)) {
         try {
             tmp_size = std::stod(tmp_str);
