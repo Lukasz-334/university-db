@@ -1,5 +1,5 @@
-#include <iomanip>
 #include <algorithm>
+#include <iomanip>
 #include <iostream>
 #include <string>
 #include "db.hpp"
@@ -7,8 +7,9 @@
 #include "student.hpp"
 
 int main(int argc, char** argv) {
-    std::vector<std::string> args(argv, argv+argc);
-    Db bd2;
+    std::vector<std::string> args(argv, argv + argc);
+    size_t vector_reserve = 10;
+    Db bd2(vector_reserve);
     if (args.size() < 2) {
         Menu MyMenu(
             "+----------------------------------+\n"
@@ -44,7 +45,7 @@ int main(int argc, char** argv) {
                 break;
             case 4:
                 MyMenu.printHeader();
-                bd2.searchPeselInMenu(); 
+                bd2.searchPeselInMenu();
                 MyMenu.printContinue();
                 break;
             case 5:
@@ -87,7 +88,7 @@ int main(int argc, char** argv) {
             std::cout << "+--------------------------------------------+\n"
                       << "+           START TEST PROCEDURES:           +\n"
                       << "+--------------------------------------------+\n\n"
-                      << "Adding new student to database (corret PESEL):\n";   
+                      << "Adding new student to database (corret PESEL):\n";
             Student tmp_stud;
             tmp_stud.setName("Adam");
             tmp_stud.setSurname("Konieczny");
@@ -146,7 +147,7 @@ int main(int argc, char** argv) {
             tmp_stud.setGender("M");
             bd2.addStudent(tmp_stud);
             std::cout << "----------------------------------------------\n";
-            std::cout << "Adding new student to database (incorret PESEL):\n";   
+            std::cout << "Adding new student to database (incorret PESEL):\n";
             tmp_stud.setName("Daria");
             tmp_stud.setSurname("Niebieska");
             tmp_stud.setAddress("Niebo");
@@ -155,59 +156,59 @@ int main(int argc, char** argv) {
             tmp_stud.setGender("F");
             bd2.addStudent(tmp_stud);
             std::cout << "----------------------------------------------\n";
-            std::cout << "Printing all elements in database:\n";   
+            std::cout << "Printing all elements in database:\n";
             bd2.printDb();
             std::cout << "----------------------------------------------\n";
-            std::cout << "Search student by surname 'Stanowski':\n";   
+            std::cout << "Search student by surname 'Stanowski':\n";
             if (bd2.searchSurname("Stanowski")) {
                 std::cout << "Not found.\n";
             }
             std::cout << "----------------------------------------------\n";
-            std::cout << "Search student by PESEL '79051074234':\n";   
+            std::cout << "Search student by PESEL '79051074234':\n";
             if (bd2.searchPesel("79051074234")) {
                 std::cout << "Not found.\n";
             }
             std::cout << "----------------------------------------------\n";
-            std::cout << "Delete student by index '4739':\n";   
+            std::cout << "Delete student by index '4739':\n";
             bd2.deleteStud("4739");
-            std::cout << "Delete student by index '28179':\n";   
+            std::cout << "Delete student by index '28179':\n";
             bd2.deleteStud("28179");
             std::cout << "----------------------------------------------\n";
-            std::cout << "Printing all elements in database:\n";   
+            std::cout << "Printing all elements in database:\n";
             bd2.printDb();
             std::cout << "----------------------------------------------\n";
-            std::cout << "Search student by surname 'Stanowski':\n";   
+            std::cout << "Search student by surname 'Stanowski':\n";
             if (bd2.searchSurname("Stanowski")) {
                 std::cout << "Not found.\n";
             }
             std::cout << "----------------------------------------------\n";
-            std::cout << "Search student by PESEL '79051074234':\n";   
+            std::cout << "Search student by PESEL '79051074234':\n";
             if (bd2.searchPesel("79051074234")) {
                 std::cout << "Not found.\n";
             }
             std::cout << "----------------------------------------------\n";
-            std::cout << "Save database to file 'db.dat':\n";   
+            std::cout << "Save database to file 'db.dat':\n";
             bd2.saveDbToFile("db.dat");
             std::cout << "----------------------------------------------\n";
-            std::cout << "Printing all elements in database:\n";   
+            std::cout << "Printing all elements in database:\n";
             bd2.printDb();
             std::cout << "----------------------------------------------\n";
-            std::cout << "Sort students by surname:\n";   
+            std::cout << "Sort students by surname:\n";
             bd2.sortSurname();
             std::cout << "----------------------------------------------\n";
-            std::cout << "Printing all elements in database:\n";   
+            std::cout << "Printing all elements in database:\n";
             bd2.printDb();
             std::cout << "----------------------------------------------\n";
-            std::cout << "Load database from file 'db.dat':\n";   
+            std::cout << "Load database from file 'db.dat':\n";
             bd2.loadDbFromFile("db.dat");
             std::cout << "----------------------------------------------\n";
-            std::cout << "Printing all elements in database:\n";   
+            std::cout << "Printing all elements in database:\n";
             bd2.printDb();
             std::cout << "----------------------------------------------\n";
-            std::cout << "Sort students by PESEL:\n";   
+            std::cout << "Sort students by PESEL:\n";
             bd2.sortPesel();
             std::cout << "----------------------------------------------\n";
-            std::cout << "Printing all elements in database:\n";   
+            std::cout << "Printing all elements in database:\n";
             bd2.printDb();
             std::cout << "+--------------------------------------------+\n"
                       << "+                 TEST ENDED                 +\n"

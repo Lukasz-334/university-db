@@ -1,9 +1,11 @@
 #include "db.hpp"
 #include <algorithm>
 #include <iomanip>
-#include <string>
-#include <vector>
 #include "student.hpp"
+
+Db::Db(size_t size) {
+    db_.reserve(size);
+}
 
 size_t Db::getDbSize() const {
     return db_.size();
@@ -28,22 +30,22 @@ void Db::addStudent() {
     std::string tmp_str;
     size_t tmp_size;
     std::cout << "\n Name: ";
-    std::getline (std::cin, tmp_str);
+    std::getline(std::cin, tmp_str);
     tmp_stud.setName(tmp_str);
     std::cout << " Surname: ";
-    std::getline (std::cin, tmp_str);
+    std::getline(std::cin, tmp_str);
     tmp_stud.setSurname(tmp_str);
     std::cout << " Address: ";
-    std::getline (std::cin, tmp_str);
+    std::getline(std::cin, tmp_str);
     tmp_stud.setAddress(tmp_str);
     std::cout << " Index: ";
-    std::getline (std::cin, tmp_str);
+    std::getline(std::cin, tmp_str);
     tmp_stud.setIndex(tmp_str);
     std::cout << " Gender: ";
-    std::getline (std::cin, tmp_str);
+    std::getline(std::cin, tmp_str);
     tmp_stud.setGender(tmp_str);
     std::cout << " PESEL: ";
-    std::getline (std::cin, tmp_str);
+    std::getline(std::cin, tmp_str);
     if (searchPesel(tmp_str)) {
         try {
             tmp_size = std::stod(tmp_str);
