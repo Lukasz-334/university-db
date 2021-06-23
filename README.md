@@ -1,16 +1,16 @@
 # university-db
 
 **The program is a simple database with the following functionalities:**
-- Storing student records with the following structure: Name, surname, address, index number, PESEL number, gender
-- Adding new students.
-- View the entire database.
-- Search by name.
-- Search by PESEL number.
-- Sorting by PESEL number.
-- Sort by name.
-- Delete by index number.
-- Validation or PESEL number.
-- Loading from a file and saving the entire database in a file. 
+- storing student records with the following structure: Name, surname, address, index number, PESEL number, gender,
+- adding new students,
+- view the entire database,
+- search by name,
+- search by PESEL number,
+- sorting by PESEL number,
+- sort by name,
+- delete by index number,
+- validation or PESEL number,
+- loading from a file and saving the entire database in a file. 
 
 **You can run it in two modes:**
 - with a manual menu (data read from the keyboard or a binary * .dat file),
