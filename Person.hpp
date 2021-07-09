@@ -13,7 +13,7 @@ public:
 
     Person(void);
     virtual ~Person();
-
+  
     void setName(const std::string&);
     void setSurname(const std::string&);
     void setAddress(const std::string&);
