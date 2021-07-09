@@ -51,6 +51,6 @@ std::string Person::getGender() const {
     return gender_;
 }
 
-size_t Person::getEarnings() const{
+size_t Person::getEarnings() const {
     return earnings_;
 }
