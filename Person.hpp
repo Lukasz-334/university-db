@@ -1,21 +1,18 @@
 #pragma once
-//#include "student.hpp"
 #include <iostream>
 #include <string>
-class Person{
- 
+class Person {
 public:
     std::string name_;
     std::string surname_;
     std::string address_;
     std::string index_;
     std::string pesel_;
-    std::string gender_; 
+    std::string gender_;
     size_t earnings_;
 
     Person(void);
     virtual ~Person();
-
 
     void setName(const std::string&);
     void setSurname(const std::string&);
@@ -32,7 +29,4 @@ public:
     std::string getPesel() const;
     std::string getGender() const;
     size_t getEarnings() const;
-
-    
 };
-

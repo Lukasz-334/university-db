@@ -1,4 +1,5 @@
 #include "DataBase.hpp"
+#include "Employee.hpp"
 #include "Person.hpp"
 #include "Student.hpp"
 
