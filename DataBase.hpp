@@ -1,14 +1,16 @@
 #pragma once
 #include <memory>
-#include "Person.hpp"
 #include <vector>
+#include "Person.hpp"
 
 class DataBase {
-public:
-using dataVector = std::vector<std::unique_ptr<Person>>;
-
 private:
-dataVector db_= {};
+    using dataVector = std::vector<std::unique_ptr<Person>>;
+    
+public:
+    dataVector db_ = {};
+    DataBase(size_t size);
+    bool checkPesel(size_t);
 
 
 };

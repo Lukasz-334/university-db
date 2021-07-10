@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
 class Person {
-public:
+private:
     std::string name_;
     std::string surname_;
     std::string address_;
@@ -11,9 +11,8 @@ public:
     std::string gender_;
     size_t earnings_;
 
-    Person(void);
-    virtual ~Person();
-  
+public:
+    explicit Person()=default;
     void setName(const std::string&);
     void setSurname(const std::string&);
     void setAddress(const std::string&);
