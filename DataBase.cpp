@@ -20,3 +20,14 @@ bool DataBase::checkPesel(size_t pesel) {
     }
     return ((sum > 0) && (sum % 10 == 0));
 }
+
+bool DataBase::searchPesel(const std::string& pesel) {
+    bool peselFound = false;
+    for (int i=0;i<db_.size();i++) {
+        if (db_[i]->getPesel() == pesel) {
+            peselFound = true;
+            break;
+        }
+    }
+    return peselFound;
+}
