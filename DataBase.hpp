@@ -14,4 +14,9 @@ public:
     bool checkPesel(size_t);
     bool searchPesel(const std::string& pesel);
     void addPerson();
+    void addPerson(std::unique_ptr<Person>& ptr);
+    bool testPesel(const std::string& );
+    size_t stringToDouble(const std::string&);
+
+
 };

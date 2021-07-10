@@ -1,11 +1,9 @@
 #include "DataBase.hpp"
 #include "Person.hpp"
 
-
-DataBase::DataBase(size_t size=0){
-       db_.reserve(size);
+DataBase::DataBase(size_t size = 0) {
+    db_.reserve(size);
 }
-
 
 bool DataBase::checkPesel(size_t pesel) {
     int multiplication[11] = {1, 3, 7, 9, 1, 3, 7, 9, 1, 3, 1};
@@ -23,7 +21,7 @@ bool DataBase::checkPesel(size_t pesel) {
 
 bool DataBase::searchPesel(const std::string& pesel) {
     bool peselFound = true;
-    for (int i=0;i<db_.size();i++) {
+    for (int i = 0; i < db_.size(); i++) {
         if (db_[i]->getPesel() == pesel) {
             peselFound = false;
             break;
@@ -32,9 +30,39 @@ bool DataBase::searchPesel(const std::string& pesel) {
     return peselFound;
 }
 
+size_t DataBase::stringToDouble(const std::string& str) {
+    size_t tmp = 1;
+    if (str.size() != 11) {
+        tmp = 2;
+    } else {
+        try {
+            tmp = std::stod(str);
+        } catch (...) {
+            tmp = 0;
+        }
+    }
+    return tmp;
+}
+
+bool DataBase::testPesel(const std::string& tmp_str) {
+    size_t tmp_size = 0;
+    if (searchPesel(tmp_str)) {
+        tmp_size = stringToDouble(tmp_str);
+        if (checkPesel(tmp_size)) {
+            std::cout << "Student added.\n";
+            return true;
+        } else {
+            std::cout << "\n Student not added. Wrong PESEL !\n";
+            return false;
+        }
+    } else {
+        std::cout << "\n Student with this PESEL already exists!\n";
+        return false;
+    }
+}
 
 void DataBase::addPerson() {
-    std::unique_ptr<Person> ptr= std::make_unique<Person>();
+    std::unique_ptr<Person> ptr = std::make_unique<Person>();
     std::string tmp_str;
     size_t tmp_size;
     std::cout << "\n Name: ";
@@ -54,21 +82,15 @@ void DataBase::addPerson() {
     ptr->setGender(tmp_str);
     std::cout << " PESEL: ";
     std::getline(std::cin, tmp_str);
-    if (searchPesel(tmp_str)) {
-        try {
-            tmp_size = std::stod(tmp_str);
-        } catch (...) {
-            tmp_size = 0;
-        }
-        if (checkPesel(tmp_size)) {
-            ptr->setPesel(tmp_str);
-            db_.push_back(std::move(ptr));
-            std::cout << "Student added.\n";
-            std::cout << "Number of student in Database: " << db_.size() << '\n';
-        } else {
-            std::cout << "\n Student not added. Wrong PESEL !\n";
-        }
-    } else {
-        std::cout << "\n Student with this PESEL already exists!\n";
+    if (testPesel(tmp_str)) {
+        ptr->setPesel(tmp_str);
+        db_.push_back(std::move(ptr));
+    }
+}
+
+void DataBase::addPerson(std::unique_ptr<Person>& ptr) {
+    std::string tmp_str_t = ptr->getPesel();
+    if (testPesel(tmp_str_t)) {
+        db_.push_back(std::move(ptr));
     }
 }
