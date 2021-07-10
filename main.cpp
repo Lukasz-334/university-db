@@ -6,14 +6,10 @@
 
 int main() {
     DataBase base(5);
-   
-    base.db_.push_back(std::make_unique<Person>());
-    base.db_.push_back(std::make_unique<Person>());
-    base.db_[0]->setPesel("888");
-    base.db_[1]->setPesel("111");
-    std::cout <<base.searchPesel("110");
 
-   
-
+    base.addPerson();
+    std::cout<<std::endl;
+    std::cout<<base.db_[0]->getName();
+    
     return 0;
 }

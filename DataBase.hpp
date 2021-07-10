@@ -13,5 +13,5 @@ public:
     DataBase(size_t size);
     bool checkPesel(size_t);
     bool searchPesel(const std::string& pesel);
-
+    void addPerson();
 };
