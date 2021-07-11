@@ -2,24 +2,22 @@
 #include "DataBase.hpp"
 #include "Employee.hpp"
 #include "Person.hpp"
+#include <string>
 #include "Student.hpp"
+#include <vector>
 
 int main() {
     
-  
-    DataBase base(5);
-    
-    std::unique_ptr<Person> ptr= std::make_unique<Person>();
-    std::unique_ptr<Person> ptr2= std::make_unique<Person>();
-    
-    ptr->setName("piotr");
-    ptr->setPesel("44051401458");
-
-    ptr2->setPesel("2");
-
-    base.addPerson(ptr);
-    base.addPerson(ptr2);
-
-
-    return 0;
+  DataBase uniDb;
+  std::cout << uniDb.db_.size(); 
+  std::cout << '\n';
+  Student stud1("Adam","Konieczny","Warszawa","47052253642",ID::StudentMale,"31456");
+  uniDb.addPerson(stud1);
+  std::cout << uniDb.db_.size();
+  std::cout << '\n';
+  Student stud2("Ala","Lala","Warszawa","111",ID::StudentFemale ,"12345");
+  uniDb.addPerson(stud2);
+  std::cout << uniDb.db_.size();
+  std::cout << '\n';
+  return 0;
 }
