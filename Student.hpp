@@ -8,9 +8,10 @@ public:
             const std::string pesel,
             const ID gender,  //enum
             const std::string index);
-private:
-std::string index_;
-void setIndex(std::string&);
-std::string getIndex() const;
 
+    void setIndex(std::string&);
+    std::string getIndex() const;
+
+private:
+    std::string index_;
 };

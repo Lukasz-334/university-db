@@ -15,9 +15,14 @@ int main() {
   uniDb.addPerson(stud1);
   std::cout << uniDb.db_.size();
   std::cout << '\n';
-  Student stud2("Ala","Lala","Warszawa","111",ID::StudentFemale ,"12345");
-  uniDb.addPerson(stud2);
+  Employee emp("Ala","Lala","Warszawa","47052253642",ID::StudentFemale ,1245);
+  uniDb.addPerson(emp);
   std::cout << uniDb.db_.size();
   std::cout << '\n';
+  
+ 
+
+
+
   return 0;
 }
