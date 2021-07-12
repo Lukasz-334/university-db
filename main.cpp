@@ -11,7 +11,7 @@ int main() {
   DataBase uniDb;
   std::cout << uniDb.db_.size(); 
   std::cout << '\n';
-  Student stud1("Adam","Konieczny","Warszawa","47052253642",ID::StudentMale,"31456");
+  Student stud1("Adam","Konieczny","Warszawa","01241249667",ID::StudentMale,"31456");
   uniDb.addPerson(stud1);
   std::cout << uniDb.db_.size();
   std::cout << '\n';
@@ -20,9 +20,7 @@ int main() {
   std::cout << uniDb.db_.size();
   std::cout << '\n';
   
- 
-
-
-
+  
+  
   return 0;
 }

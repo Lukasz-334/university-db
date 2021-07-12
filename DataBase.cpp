@@ -1,10 +1,40 @@
 #include "DataBase.hpp"
 #include <memory>
-#include "Person.hpp"
 #include <string>
 
 DataBase::DataBase(size_t size = 0) {
     db_.reserve(size);
+}
+
+size_t DataBase::stringToDouble(const std::string& str) {
+    size_t tmp = 1;
+    if (str.size() != 11) {
+        tmp = 2;
+    } else {
+        try {
+            tmp = std::stod(str);
+        } catch (...) {
+            tmp = 0;
+        }
+    }
+    return tmp;
+}
+
+bool DataBase::testPesel(const std::string& tmp_str) {
+    size_t tmp_size = 0;
+    if (searchPesel(tmp_str)) {
+        tmp_size = stringToDouble(tmp_str);
+        if (checkPesel(tmp_size)) {
+            std::cout << "Student added.\n";
+            return true;
+        } else {
+            std::cout << "Wrong PESEL !\n";
+            return false;
+        }
+    } else {
+        std::cout << "Student with this PESEL already exists!\n";
+        return false;
+    }
 }
 
 bool DataBase::checkPesel(size_t pesel) {
@@ -32,17 +62,12 @@ bool DataBase::searchPesel(const std::string& pesel) {
     return peselFound;
 }
 
-bool DataBase::addPerson(Person& person){
-    size_t tmp_size;
-    try {
-        tmp_size = std::stod(person.getPesel());
-    } catch (...) {
-        tmp_size = 0;
-    }
-    if (checkPesel(tmp_size)) {
+bool DataBase::addPerson(const Person& person) {
+    std::string tmp_str_t = person.getPesel();
+    if (testPesel(tmp_str_t)) {
         std::unique_ptr<Person> ptr = std::make_unique<Person>(person);
-       db_.emplace_back(std::move(ptr));
-    return true; 
-    } return false;   
+        db_.emplace_back(std::move(ptr));
+        return true;
+    }
+    return false;
 }
-
