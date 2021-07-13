@@ -14,6 +14,7 @@ Student::Student(const std::string name,
 void Student::setIndex(std::string& index) {
     index_ = index;
 }
+
 std::string Student::getIndex() const {
     return index_;
 }

@@ -16,7 +16,8 @@ public:
     DataBase(size_t size);
     bool checkPesel(size_t);
     bool searchPesel(const std::string&);
-    bool addPerson(const Person&);
+    bool addEmployee(const Employee&);
+    bool addStudent(const Student&);
     bool testPesel(const std::string&);
     size_t stringToDouble(const std::string&);
     void sortByEarnings();

@@ -33,7 +33,8 @@ public:
     virtual std::string getAddress() const;
     virtual std::string getPesel() const;
     virtual ID getGender() const;
-
+    virtual std::string getIndex() const;
+    virtual size_t getEarnings() const;
 private:
     std::string name_;
     std::string surname_;

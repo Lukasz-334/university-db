@@ -47,3 +47,11 @@ std::string Person::getPesel() const {
 ID Person::getGender() const {
     return gender_;
 }
+std::string Person::getIndex() const {
+
+    return "x";
+}
+size_t Person::getEarnings() const {
+
+    return 0;
+}

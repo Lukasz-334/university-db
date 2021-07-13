@@ -25,7 +25,7 @@ bool DataBase::testPesel(const std::string& tmp_str) {
     if (searchPesel(tmp_str)) {
         tmp_size = stringToDouble(tmp_str);
         if (checkPesel(tmp_size)) {
-            std::cout << "Student added.\n";
+            std::cout << "Person added.\n";
             return true;
         } else {
             std::cout << "Wrong PESEL !\n";
@@ -62,12 +62,41 @@ bool DataBase::searchPesel(const std::string& pesel) {
     return peselFound;
 }
 
-bool DataBase::addPerson(const Person& person) {
+
+bool DataBase::addEmployee(const Employee& person) {
     std::string tmp_str_t = person.getPesel();
     if (testPesel(tmp_str_t)) {
-        std::unique_ptr<Person> ptr = std::make_unique<Person>(person);
+        std::unique_ptr<Employee> ptr = std::make_unique<Employee>(person);
+
         db_.emplace_back(std::move(ptr));
         return true;
     }
     return false;
 }
+bool DataBase::addStudent(const Student& person) {
+    std::string tmp_str_t = person.getPesel();
+    if (testPesel(tmp_str_t)) {
+        std::unique_ptr<Student> ptr = std::make_unique<Student>(person);
+        
+        db_.emplace_back(std::move(ptr));
+        return true;
+    }
+    return false;
+}
+
+void DataBase::sortByEarnings(){
+
+ std::sort(db_.begin(),db_.end(),[](std::unique_ptr<Person>& a, std::unique_ptr<Person>& b){
+   
+   size_t x = a->getEarnings();
+   size_t y = b->getEarnings();
+
+   return x<y;
+
+ });
+
+ }
+
+
+
+

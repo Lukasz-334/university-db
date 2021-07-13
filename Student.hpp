@@ -10,8 +10,10 @@ public:
             const std::string index);
 
     void setIndex(std::string&);
+   
     std::string getIndex() const;
 
 private:
     std::string index_;
+
 };
