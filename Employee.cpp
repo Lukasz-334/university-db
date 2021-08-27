@@ -11,7 +11,7 @@ Employee::Employee(const std::string name,
     : Person(name, surname, address, pesel, gender), earnings_(earnings)
     {};
 
-void Employee::setEarnings(size_t& earnings) {
+void Employee::setEarnings(const size_t& earnings) {
     earnings_ = earnings;
 }
 size_t Employee::getEarnings() const {

@@ -12,7 +12,7 @@ int main() {
     
     Student stud1("Adam", "Konieczny", "Warszawa", "01241249667", ID::StudentMale, "31456");
     Employee emp1("Ala", "Lala", "Warszawa", "47052253642", ID::StudentFemale, 1245);
-    Employee emp2("Piotr", "Nowak", "Warszawa", "98010233714", ID::StudentFemale, 345);
+    Employee emp2("Piotr", "Konieczny", "Warszawa", "98010233714", ID::StudentFemale, 345);
     
     uniDb.addStudent(stud1);
     uniDb.addEmployee(emp1);
@@ -21,14 +21,50 @@ int main() {
     std::cout <<"number in the database "<< uniDb.db_.size();
     std::cout << '\n';
 
-    uniDb.sortByEarnings();
+
+
+/////////////////////////////////////////////////////////
+/* Test sortPesel
+    
+    uniDb.sortByPesel();
+
+
+for (const auto& pers : uniDb.db_) {
+        std::cout << pers->getPesel();
+        std::cout << '\n';
+        }
+*/
+///////////////////////////////////////////////////
+
+    /*Test searchSurname
+
+    std::vector<Person*> p;
+  
+    p=uniDb.searchSurname("Konieczny");
+  
+    for(auto x:p){
+
+        std::cout<<x->getSurname();
+        std::cout << '\n';
+    }
    
+    */
+
+////////////////////////////////////////////////////
+    /*Test modificationOfEarnings();
+    
+    uniDb.modificationOfEarnings();
+  
     for (const auto& pers : uniDb.db_) {
         if(pers->getEarnings() != 0){
         std::cout << pers->getEarnings();
         std::cout << '\n';
         }
     }
+*/
+//////////////////////////////////////////////////////
+
+
 
     return 0;
 }

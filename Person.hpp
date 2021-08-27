@@ -35,6 +35,8 @@ public:
     virtual ID getGender() const;
     virtual std::string getIndex() const;
     virtual size_t getEarnings() const;
+    virtual void setEarnings(const size_t& );
+
 private:
     std::string name_;
     std::string surname_;

@@ -10,7 +10,7 @@ class Employee : public Person {
              const ID gender,  //enum
              size_t earnings);
 
-    void setEarnings(size_t& );
+    void setEarnings(const size_t& );
     size_t getEarnings() const;
 
 private:

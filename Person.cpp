@@ -28,6 +28,10 @@ void Person::setGender(ID& gender) {
     gender_ = gender;
 }
 
+void Person::setEarnings(const size_t& ){
+    
+}
+
 std::string Person::getName() const {
     return name_;
 }
