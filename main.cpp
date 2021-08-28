@@ -24,10 +24,10 @@ int main() {
         std::cout << pers->getSurname();
         std::cout << '\n';
     }
-
+    std::cout << '\n';
 
 ////////////////////////////////////////////////////
-
+/*
     std::cout<<'\n';
     uniDb.deleteStudent("31456");
 
@@ -37,10 +37,9 @@ std::cout<<"after delete  "<<'\n';
         std::cout << pers->getSurname();
         std::cout << '\n';
     }
-
+*/
  //////////////////////////////////////////////////////
-    
-    /* Test sortBySurname
+/*    
 uniDb.sortBySurname();
 
 for (const auto& pers : uniDb.db_) {
@@ -48,7 +47,7 @@ for (const auto& pers : uniDb.db_) {
         std::cout << '\n';
         }
 */
-    /////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
     /* Test sortPesel
     
     uniDb.sortByPesel();
@@ -61,7 +60,7 @@ for (const auto& pers : uniDb.db_) {
 */
     ///////////////////////////////////////////////////
 
-    /*Test searchSurname
+/*
 
     std::vector<Person*> p;
   
@@ -73,7 +72,7 @@ for (const auto& pers : uniDb.db_) {
         std::cout << '\n';
     }
    
-    */
+*/
 
     ////////////////////////////////////////////////////
     /*Test modificationOfEarnings();

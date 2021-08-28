@@ -8,9 +8,9 @@ DataBase::DataBase(size_t size = 0) {
 }
 
 void DataBase::changeToSmall(std::string& word) {
-    for (auto& sign : word) {
-        sign = tolower(sign);
-    }
+   std::transform(begin(word),end(word),begin(word),[](unsigned char c){
+    return std::tolower(c);
+   });
 }
 
 size_t DataBase::stringToDouble(const std::string& str) {
