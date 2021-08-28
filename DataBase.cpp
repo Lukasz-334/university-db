@@ -45,11 +45,11 @@ bool DataBase::testPesel(const std::string& tmp_str) {
 }
 
 bool DataBase::checkPesel(size_t pesel) {
-    int multiplication[11] = {1, 3, 7, 9, 1, 3, 7, 9, 1, 3, 1};
-    int sum = 0;
-    int tab_pesel[11]{};
+    size_t multiplication[11] = {1, 3, 7, 9, 1, 3, 7, 9, 1, 3, 1};
+    size_t sum = 0;
+    size_t tab_pesel[11]{};
     for (int i = 10; i >= 0; i--) {
-        tab_pesel[i] = pesel % 10;
+        tab_pesel[i] = pesel % static_cast<size_t>(10);
         pesel = pesel / 10;
     }
     for (int i = 0; i < 11; i++) {

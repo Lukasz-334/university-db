@@ -8,8 +8,7 @@ Employee::Employee(const std::string name,
                    const std::string pesel,
                    const ID gender,  //enum
                    size_t earnings)
-    : Person(name, surname, address, pesel, gender), earnings_(earnings)
-    {};
+    : Person(name, surname, address, pesel, gender), earnings_(earnings){};
 
 void Employee::setEarnings(const size_t& earnings) {
     earnings_ = earnings;
