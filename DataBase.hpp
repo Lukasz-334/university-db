@@ -1,5 +1,4 @@
 #pragma once
-#include <algorithm>
 #include <memory>
 #include <vector>
 #include "Person.hpp"
@@ -24,14 +23,20 @@ public:
    
     bool addEmployee(const Employee&);
     bool addStudent(const Student&);
-    
+    void deleteStudent(const std::string& index);
+
+
     void sortByEarnings();
     void sortByPesel();
+    void sortBySurname();
     
     void modificationOfEarnings(); 
     
     
 };
+
+
+
 /*
 
    
@@ -39,13 +44,13 @@ public:
     Wyświetlanie całej bazy danych 
     
     Wyszukiwanie po nazwisku OK
-    Wyszukiwanie po numerze PESEL ???(funkcja zwraca bool czy tak ma być?)
+    Wyszukiwanie po numerze PESEL OK
     
     Sortowanie po numerze PESEL OK(rosnąco od najstarszych do najmłodszych)
-    Sortowanie po nazwisku
+    Sortowanie po nazwisku OK
     Sortowanie po zarobkach (problematyczne) OK
     
-    Usuwanie po numerze indeksu
+    Usuwanie po numerze indeksu OK
     Walidacja czy numer PESEL jest poprawny Wiki - poprawność PESEL (trudne) OK
     Wczytywanie z pliku i zapisywanie całej bazy w pliku (trudne)
     

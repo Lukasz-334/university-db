@@ -1,11 +1,11 @@
 #include "DataBase.hpp"
+#include <algorithm>
 #include <memory>
 #include <string>
 
 DataBase::DataBase(size_t size = 0) {
     db_.reserve(size);
 }
-
 
 void DataBase::changeToSmall(std::string& word) {
     for (auto& sign : word) {
@@ -100,7 +100,7 @@ void DataBase::sortByEarnings() {
 }
 
 void DataBase::sortByPesel() {
-    std::sort(db_.begin(), db_.end(), [](std::unique_ptr<Person>& first, std::unique_ptr<Person>& second) {
+    std::sort(db_.begin(), db_.end(), [](const std::unique_ptr<Person>& first, const std::unique_ptr<Person>& second) {
         std::string first_pesel = first->getPesel();
         std::string second_pesel = second->getPesel();
         if ((first_pesel[0] == '0') || (first_pesel[0] == '1')) {
@@ -120,7 +120,15 @@ void DataBase::sortByPesel() {
     });
 }
 
-
+void DataBase::sortBySurname() {
+    std::sort(db_.begin(), db_.end(), [&](const std::unique_ptr<Person>& first, const std::unique_ptr<Person>& second) {
+        std::string first_surname = first->getSurname();
+        std::string second_surname = second->getSurname();
+        changeToSmall(first_surname);
+        changeToSmall(second_surname);
+        return first_surname < second_surname;
+    });
+}
 
 std::vector<Person*> DataBase::searchSurname(const std::string& surname) {
     std::vector<Person*> vecSurname;
@@ -157,5 +165,18 @@ void DataBase::modificationOfEarnings() {
     }
     if (peselFound == false) {
         std::cout << "Wrong PESEL !\n ";
+    }
+}
+
+void DataBase::deleteStudent(const std::string& index) {
+    auto index_position = std::find_if(std::begin(db_), std::end(db_), [index](const std::unique_ptr<Person>& p) {
+        return (index == p->getIndex());
+    });
+
+    if (index_position != std::end(db_)) {
+        db_.erase(index_position);
+        std::cout << "Student removed" << '\n';
+    } else {
+        std::cout << "Index nr " << index << " not found" << '\n';
     }
 }
