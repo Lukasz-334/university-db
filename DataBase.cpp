@@ -39,7 +39,7 @@ bool DataBase::testPesel(const std::string& tmp_str) {
             return false;
         }
     } else {
-        std::cout << "Student with this PESEL already exists!\n";
+        std::cout << "Person with this PESEL already exists!\n";
         return false;
     }
 }

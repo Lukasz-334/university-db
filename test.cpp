@@ -1,4 +1,7 @@
 #include "DataBase.hpp"
+#include "Employee.hpp"
+#include "Person.hpp"
+#include "Student.hpp"
 
 #include <string>
 #include <vector>
@@ -32,11 +35,48 @@ TEST(changeToSmallTest, changeUppercaseToLowercase) {
     std::string test_string_second = "AbCdEf";
 
     uniDb.changeToSmall(test_string);
-    EXPECT_EQ(test_string, "fruit");
+    ASSERT_EQ(test_string, "fruit");
 
     uniDb.changeToSmall(test_string_first);
-    EXPECT_EQ(test_string_first, "abcde");
+    ASSERT_EQ(test_string_first, "abcde");
 
     uniDb.changeToSmall(test_string_second);
-    EXPECT_EQ(test_string_second, "abcdef");
+    ASSERT_EQ(test_string_second, "abcdef");
+}
+//bool addEmployee(const Employee&);
+
+TEST(addEmployeeTest, testOfAddingAPersonToTheDatabase) {
+    Employee emp("Adam", "Konieczny", "Warszawa", "01241249667", ID::EmployeeMale, 5678);
+    Employee emp1("Ala", "Bala", "Warszawa", "47052253642", ID::EmployeeFemale, 1245);
+    Employee emp2("Piotr", "Konieczny", "Warszawa", "98010233714", ID::EmployeeMale, 3452);
+    Employee emp3("Ryszard", "Konieczny", "Toruń", "98010233714", ID::EmployeeMale, 3453);
+    Employee emp4("Zbigniew", "Nowak", "Toruń", "111111111", ID::EmployeeMale, 3753);
+
+    ASSERT_EQ(uniDb.addEmployee(emp), true);
+    ASSERT_EQ(uniDb.addEmployee(emp1), true);
+    ASSERT_EQ(uniDb.addEmployee(emp2), true);
+    ASSERT_EQ(uniDb.addEmployee(emp3), false);
+    ASSERT_EQ(uniDb.addEmployee(emp4), false);
+}
+
+//void deleteStudent(const std::string& index);
+
+TEST(deleteStudentTest, testToRemoveAStudentFromTheBase) {
+    uniDb.db_.clear();
+
+    Student stud1("Ala", "Lala", "Warszawa", "47052253642", ID::StudentFemale, "5678");
+    Student stud2("Adam", "Konieczny", "Warszawa", "01241249667", ID::StudentMale, "1234");
+    Student stud3("Piotr", "Nowak", "Warszawa", "98010233714", ID::StudentMale, "9876");
+    uniDb.addStudent(stud1);
+    uniDb.addStudent(stud2);
+    uniDb.addStudent(stud3);
+
+    size_t base_size = uniDb.db_.size();
+    uniDb.deleteStudent("5678");
+    ASSERT_EQ(base_size, uniDb.db_.size()+1);
+
+    base_size = uniDb.db_.size();
+    uniDb.deleteStudent("2222");
+    ASSERT_EQ(base_size, uniDb.db_.size());
+
 }
