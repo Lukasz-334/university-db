@@ -1,8 +1,4 @@
 #include "DataBase.hpp"
-#include "Employee.hpp"
-#include "Person.hpp"
-#include "Student.hpp"
-
 #include <string>
 #include <vector>
 #include "gtest/gtest.h"
@@ -59,8 +55,6 @@ TEST(addEmployeeTest, testOfAddingAPersonToTheDatabase) {
     ASSERT_EQ(uniDb.addEmployee(emp4), false);
 }
 
-//void deleteStudent(const std::string& index);
-
 TEST(deleteStudentTest, testToRemoveAStudentFromTheBase) {
     uniDb.db_.clear();
 
@@ -73,10 +67,24 @@ TEST(deleteStudentTest, testToRemoveAStudentFromTheBase) {
 
     size_t base_size = uniDb.db_.size();
     uniDb.deleteStudent("5678");
-    ASSERT_EQ(base_size, uniDb.db_.size()+1);
+    ASSERT_EQ(base_size, uniDb.db_.size() + 1);
 
     base_size = uniDb.db_.size();
     uniDb.deleteStudent("2222");
     ASSERT_EQ(base_size, uniDb.db_.size());
-
 }
+
+TEST(searchPeselTest, returnsFalseIfPeselExists) {
+    uniDb.db_.clear();
+    Student stud1("Ala", "Lala", "Warszawa", "47052253642", ID::StudentFemale, "5678");
+    Student stud2("Adam", "Konieczny", "Warszawa", "01241249667", ID::StudentMale, "1234");
+    Student stud3("Piotr", "Nowak", "Warszawa", "98010233714", ID::StudentMale, "9876");
+    uniDb.addStudent(stud1);
+    uniDb.addStudent(stud2);
+    uniDb.addStudent(stud3);
+
+    ASSERT_EQ(uniDb.searchPesel("47052253642"), false);
+    ASSERT_EQ(uniDb.searchPesel("01241249667"), false);
+    ASSERT_EQ(uniDb.searchPesel("01241249669"), true);
+}
+

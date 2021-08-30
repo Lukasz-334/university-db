@@ -59,14 +59,10 @@ bool DataBase::checkPesel(size_t pesel) {
 }
 
 bool DataBase::searchPesel(const std::string& pesel) {
-    bool peselFound = true;
-    for (long unsigned int i = 0; i < db_.size(); i++) {
-        if (db_[i]->getPesel() == pesel) {
-            peselFound = false;
-            break;
-        }
-    }
-    return peselFound;
+    auto index_position = find_if(begin(db_), end(db_), [pesel](const std::unique_ptr<Person>& ptr) {
+        return pesel==ptr->getPesel();
+    });
+    return index_position == end(db_);                           
 }
 
 bool DataBase::addEmployee(const Employee& person) {
@@ -169,8 +165,8 @@ void DataBase::modificationOfEarnings() {
 }
 
 void DataBase::deleteStudent(const std::string& index) {
-    auto index_position = std::find_if(std::begin(db_), std::end(db_), [index](const std::unique_ptr<Person>& p) {
-        return (index == p->getIndex());
+    auto index_position = find_if(begin(db_), end(db_), [index](const std::unique_ptr<Person>& ptr) {
+        return (index == ptr->getIndex());
     });
 
     if (index_position != std::end(db_)) {
