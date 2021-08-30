@@ -8,9 +8,9 @@ DataBase::DataBase(size_t size = 0) {
 }
 
 void DataBase::changeToSmall(std::string& word) {
-   std::transform(begin(word),end(word),begin(word),[](unsigned char c){
-    return std::tolower(c);
-   });
+    std::transform(begin(word), end(word), begin(word), [](unsigned char c) {
+        return std::tolower(c);
+    });
 }
 
 size_t DataBase::stringToDouble(const std::string& str) {
@@ -49,7 +49,7 @@ bool DataBase::checkPesel(size_t pesel) {
     size_t sum = 0;
     size_t tab_pesel[11]{};
     for (int i = 10; i >= 0; i--) {
-        tab_pesel[i] = pesel % static_cast<size_t>(10);
+        tab_pesel[i] = pesel % 10;
         pesel = pesel / 10;
     }
     for (int i = 0; i < 11; i++) {
