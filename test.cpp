@@ -143,3 +143,27 @@ TEST(sortByEarningsTest, SortsEarningsInAscendingOrder) {
 
     ASSERT_EQ(earnings, expected);
 }
+
+TEST(sortByPesel, SortsPeselInAscendingOrder) {
+    //test on the data given in the text sortByEarningsTest
+    std::vector<std::string> expected{"47052253642",
+                                      "79051074234",
+                                      "83091644917",
+                                      "91031583965",
+                                      "98010233714",
+                                      "01241249667",
+                                      "02322962488",
+                                      "03222576535",
+                                      "03282974346",
+                                      "03310167447"};
+    uniDb.sortByPesel();
+    std::vector<std::string> pesel;
+
+    for (const auto& pers : uniDb.db_) {
+        pesel.push_back(pers->getPesel());
+    }
+
+ASSERT_EQ(pesel, expected);
+
+}
+
