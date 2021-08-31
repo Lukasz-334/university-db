@@ -27,27 +27,7 @@ int main() {
     std::cout << '\n';
 
 
- //////////////////////////////////////////////////////
-/*    
-uniDb.sortBySurname();
 
-for (const auto& pers : uniDb.db_) {
-        std::cout << pers->getSurname();
-        std::cout << '\n';
-        }
-*/
-/////////////////////////////////////////////////////////
-    /* Test sortPesel
-    
-    uniDb.sortByPesel();
-
-
-for (const auto& pers : uniDb.db_) {
-        std::cout << pers->getPesel();
-        std::cout << '\n';
-        }
-*/
-   
  ////////////////////////////////////////////////////
     /*Test modificationOfEarnings();
     

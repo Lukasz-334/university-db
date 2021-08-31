@@ -144,7 +144,7 @@ TEST(sortByEarningsTest, SortsEarningsInAscendingOrder) {
     ASSERT_EQ(earnings, expected);
 }
 
-TEST(sortByPesel, SortsPeselInAscendingOrder) {
+TEST(sortByPeselTest, SortsPeselInAscendingOrder) {
     //test on the data given in the text sortByEarningsTest
     std::vector<std::string> expected{"47052253642",
                                       "79051074234",
@@ -163,7 +163,49 @@ TEST(sortByPesel, SortsPeselInAscendingOrder) {
         pesel.push_back(pers->getPesel());
     }
 
-ASSERT_EQ(pesel, expected);
+    ASSERT_EQ(pesel, expected);
+}
 
+TEST(sortBySurnameTest, SortsSurnameInAscendingOrder) {
+    uniDb.db_.clear();
+    Student stud1("Ala", "Cccd", "Warszawa", "47052253642", ID::StudentFemale, "5678");
+    Student stud2("Adam", "ZZZZ", "Warszawa", "01241249667", ID::StudentMale, "1234");
+    Employee emp1("Jan", "aBBB", "Sochaczew", "02322962488", ID::EmployeeMale, 5678);
+    Student stud3("Piotr", "bacB", "Warszawa", "98010233714", ID::StudentMale, "9876");
+    Employee emp2("Piotr", "aBCB", "Sochaczew", "79051074234", ID::EmployeeMale, 2623);
+    Employee emp3("John", "Dada", "NewYork", "83091644917", ID::EmployeeMale, 3467);
+    Employee emp4("Jacek", "CcCC", "NewYork", "03282974346", ID::EmployeeMale, 1467);
+    Employee emp5("Helena", "Aabb", "Opole", "91031583965", ID::EmployeeMale, 3322);
+    Student stud4("Krzysztof", "baba", "Torun", "03222576535", ID::StudentMale, "2869");
+    Employee emp6("Teodora", "Dbda", "Kamion", "03310167447", ID::EmployeeMale, 10731);
+    uniDb.addStudent(stud2);
+    uniDb.addStudent(stud3);
+    uniDb.addEmployee(emp5);
+    uniDb.addEmployee(emp6);
+    uniDb.addStudent(stud4);
+    uniDb.addEmployee(emp1);
+    uniDb.addEmployee(emp2);
+    uniDb.addStudent(stud1);
+    uniDb.addEmployee(emp3);
+    uniDb.addEmployee(emp4);
+
+    std::vector<std::string> expected{"Aabb",
+                                      "aBBB",
+                                      "aBCB",
+                                      "baba",
+                                      "bacB",
+                                      "CcCC",
+                                      "Cccd",
+                                      "Dada",
+                                      "Dbda",
+                                      "ZZZZ"};
+    uniDb.sortBySurname();
+    std::vector<std::string> surname;
+
+    for (const auto& person : uniDb.db_) {
+        surname.push_back(person->getSurname());
+    }
+
+    ASSERT_EQ(surname, expected);
 }
 
