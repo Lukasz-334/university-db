@@ -12,7 +12,7 @@ TEST(checkPeselTest, checksIfThePeselIsCorrect) {
         "980102337145",
         "98010233714",
         "0124124344",
-    };
+        "78051401458"};
 
     std::vector<size_t> tested_pesel_int;
     for (const std::string& s : tested_pesel) {
@@ -23,6 +23,7 @@ TEST(checkPeselTest, checksIfThePeselIsCorrect) {
     EXPECT_EQ(uniDb.checkPesel(tested_pesel_int.at(2)), false);
     EXPECT_EQ(uniDb.checkPesel(tested_pesel_int.at(3)), true);
     EXPECT_EQ(uniDb.checkPesel(tested_pesel_int.at(4)), false);
+    EXPECT_EQ(uniDb.checkPesel(tested_pesel_int.at(5)), false);
 }
 
 TEST(changeToSmallTest, changeUppercaseToLowercase) {
@@ -39,7 +40,6 @@ TEST(changeToSmallTest, changeUppercaseToLowercase) {
     uniDb.changeToSmall(test_string_second);
     ASSERT_EQ(test_string_second, "abcdef");
 }
-
 
 TEST(addEmployeeTest, testOfAddingAPersonToTheDatabase) {
     Employee emp("Adam", "Konieczny", "Warszawa", "01241249667", ID::EmployeeMale, 5678);
@@ -106,4 +106,39 @@ TEST(searchSurnameTest, returnsAVectorOfSurnames) {
     ASSERT_EQ("Konieczny", v_surname.at(0)->getSurname());
     ASSERT_EQ("Konieczny", v_surname.at(1)->getSurname());
     ASSERT_EQ(2, v_surname.size());
+}
+
+//sortByEarnings()
+
+TEST(sortByEarningsTest, SortsEarningsInAscendingOrder) {
+    uniDb.db_.clear();
+    Student stud1("Ala", "Lala", "Warszawa", "47052253642", ID::StudentFemale, "5678");
+    Student stud2("Adam", "Konieczny", "Warszawa", "01241249667", ID::StudentMale, "1234");
+    Employee emp1("Jan", "Nowak", "Sochaczew", "02322962488", ID::EmployeeMale, 5678);
+    Student stud3("Piotr", "Konieczny", "Warszawa", "98010233714", ID::StudentMale, "9876");
+    Employee emp2("Piotr", "Narewski", "Sochaczew", "79051074234", ID::EmployeeMale, 2623);
+    Employee emp3("John", "Smith", "NewYork", "83091644917", ID::EmployeeMale, 3467);
+    Employee emp4("Jacek", "Frydrych", "NewYork", "03282974346", ID::EmployeeMale, 1467);
+    Employee emp5("Helena", "Zez", "Opole", "91031583965", ID::EmployeeMale, 3322);
+    Student stud4("Krzysztof", "Bukowski", "Torun", "03222576535", ID::StudentMale, "2869");
+    Employee emp6("Teodora", "Kamyk", "Kamion", "03310167447", ID::EmployeeMale, 10731);
+    uniDb.addStudent(stud2);
+    uniDb.addStudent(stud3);
+    uniDb.addEmployee(emp5);
+    uniDb.addEmployee(emp6);
+    uniDb.addStudent(stud4);
+    uniDb.addEmployee(emp1);
+    uniDb.addEmployee(emp2);
+    uniDb.addStudent(stud1);
+    uniDb.addEmployee(emp3);
+    uniDb.addEmployee(emp4);
+
+    std::vector<int> expected{1467, 2623, 3332, 3467, 5678, 10731};
+    uniDb.sortByEarnings();
+    std::vector<int> earnings;
+
+    for (const auto& pers : uniDb.db_) {
+        earnings.push_back(pers->getEarnings());
+    }
+    ASSERT_EQ(earnings, expected);
 }
