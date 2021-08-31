@@ -1,6 +1,6 @@
-#include "DataBase.hpp"
 #include <string>
 #include <vector>
+#include "DataBase.hpp"
 #include "gtest/gtest.h"
 
 DataBase uniDb;
@@ -39,7 +39,7 @@ TEST(changeToSmallTest, changeUppercaseToLowercase) {
     uniDb.changeToSmall(test_string_second);
     ASSERT_EQ(test_string_second, "abcdef");
 }
-//bool addEmployee(const Employee&);
+
 
 TEST(addEmployeeTest, testOfAddingAPersonToTheDatabase) {
     Employee emp("Adam", "Konieczny", "Warszawa", "01241249667", ID::EmployeeMale, 5678);
@@ -88,3 +88,22 @@ TEST(searchPeselTest, returnsFalseIfPeselExists) {
     ASSERT_EQ(uniDb.searchPesel("01241249669"), true);
 }
 
+TEST(searchSurnameTest, returnsAVectorOfSurnames) {
+    uniDb.db_.clear();
+    Student stud1("Ala", "Lala", "Warszawa", "47052253642", ID::StudentFemale, "5678");
+    Student stud2("Adam", "Konieczny", "Warszawa", "01241249667", ID::StudentMale, "1234");
+    Student stud3("Piotr", "Konieczny", "Warszawa", "98010233714", ID::StudentMale, "9876");
+    Employee emp("Jan", "Nowak", "Sochaczew", "02322962488", ID::EmployeeMale, 5678);
+
+    uniDb.addStudent(stud1);
+    uniDb.addStudent(stud2);
+    uniDb.addStudent(stud3);
+    uniDb.addEmployee(emp);
+
+    std::vector<Person*> v_surname;
+    v_surname = uniDb.searchSurname("Konieczny");
+
+    ASSERT_EQ("Konieczny", v_surname.at(0)->getSurname());
+    ASSERT_EQ("Konieczny", v_surname.at(1)->getSurname());
+    ASSERT_EQ(2, v_surname.size());
+}
