@@ -57,5 +57,5 @@ std::string Person::getIndex() const {
 }
 size_t Person::getEarnings() const {
 
-    return -1;
+    return 0;
 }

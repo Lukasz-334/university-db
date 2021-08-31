@@ -108,8 +108,6 @@ TEST(searchSurnameTest, returnsAVectorOfSurnames) {
     ASSERT_EQ(2, v_surname.size());
 }
 
-//sortByEarnings()
-
 TEST(sortByEarningsTest, SortsEarningsInAscendingOrder) {
     uniDb.db_.clear();
     Student stud1("Ala", "Lala", "Warszawa", "47052253642", ID::StudentFemale, "5678");
@@ -133,12 +131,15 @@ TEST(sortByEarningsTest, SortsEarningsInAscendingOrder) {
     uniDb.addEmployee(emp3);
     uniDb.addEmployee(emp4);
 
-    std::vector<int> expected{1467, 2623, 3332, 3467, 5678, 10731};
+    std::vector<size_t> expected{1467, 2623, 3322, 3467, 5678, 10731};
     uniDb.sortByEarnings();
-    std::vector<int> earnings;
+    std::vector<size_t> earnings;
 
     for (const auto& pers : uniDb.db_) {
-        earnings.push_back(pers->getEarnings());
+        if (pers->getEarnings() != 0) {
+            earnings.push_back(pers->getEarnings());
+        }
     }
+
     ASSERT_EQ(earnings, expected);
 }
