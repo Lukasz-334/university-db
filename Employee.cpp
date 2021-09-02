@@ -16,3 +16,7 @@ void Employee::setEarnings(const size_t& earnings) {
 size_t Employee::getEarnings() const {
     return earnings_;
 }
+std::string Employee::getTypeOfPerson() const{
+    return type_of_person;
+}
+

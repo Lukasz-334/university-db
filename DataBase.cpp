@@ -150,8 +150,10 @@ bool DataBase::modificationOfEarnings(const std::string& pesel, const size_t& ne
     });
     if (index != end(db_)) {
         auto const index_position = std::distance(begin(db_), index);
-        db_[index_position]->setEarnings(new_earnings);
-        return true;
+        if (db_[index_position]->getTypeOfPerson()=="employee") {
+            db_[index_position]->setEarnings(new_earnings);
+            return true;
+        }
     }
     return false;
 }
@@ -164,6 +166,6 @@ bool DataBase::deleteStudent(const std::string& index) {
     if (index_position != std::end(db_)) {
         db_.erase(index_position);
         return true;
-    } 
+    }
     return false;
 }

@@ -26,21 +26,5 @@ int main() {
     }
     std::cout << '\n';
 
-
-
- ////////////////////////////////////////////////////
-    /*Test modificationOfEarnings();
-    
-    uniDb.modificationOfEarnings();
-  
-    for (const auto& pers : uniDb.db_) {
-        if(pers->getEarnings() != 0){
-        std::cout << pers->getEarnings();
-        std::cout << '\n';
-        }
-    }
-*/
-  
-
     return 0;
 }

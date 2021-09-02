@@ -53,9 +53,14 @@ ID Person::getGender() const {
 }
 std::string Person::getIndex() const {
 
-    return "x";
+    return "no_index";
 }
 size_t Person::getEarnings() const {
 
     return 0;
+}
+
+std::string Person::getTypeOfPerson()const {
+    
+    return "person";
 }

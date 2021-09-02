@@ -27,6 +27,8 @@ public:
     virtual void setAddress(std::string&);
     virtual void setPesel(std::string&);
     virtual void setGender(ID&);
+    virtual void setEarnings(const size_t& );
+    
 
     virtual std::string getName() const;
     virtual std::string getSurname() const;
@@ -35,7 +37,7 @@ public:
     virtual ID getGender() const;
     virtual std::string getIndex() const;
     virtual size_t getEarnings() const;
-    virtual void setEarnings(const size_t& );
+    virtual std::string getTypeOfPerson()const;
 
 private:
     std::string name_;
@@ -43,4 +45,5 @@ private:
     std::string address_;
     std::string pesel_;
     ID gender_;
+    
 };

@@ -12,7 +12,8 @@ public:
     void setIndex(std::string&);
 
     std::string getIndex() const;
-
+    std::string getTypeOfPerson() const;
 private:
     std::string index_;
+    const std::string type_of_person="student";
 };
