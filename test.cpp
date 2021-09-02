@@ -209,3 +209,30 @@ TEST(sortBySurnameTest, SortsSurnameInAscendingOrder) {
     ASSERT_EQ(surname, expected);
 }
 
+TEST(modificationOfEarningsTest, changesEarningsWhenThePeselIsCorrect) {
+    uniDb.db_.clear();
+    Student stud1("Piotr", "bacB", "Warszawa", "98010233714", ID::StudentMale, "9876");
+    Employee emp1("Piotr", "aBCB", "Sochaczew", "79051074234", ID::EmployeeMale, 2623);
+    Employee emp2("John", "Dada", "NewYork", "83091644917", ID::EmployeeMale, 3467);
+    Employee emp3("Jacek", "CcCC", "NewYork", "03282974346", ID::EmployeeMale, 1467);
+    Employee emp4("Helena", "Aabb", "Opole", "91031583965", ID::EmployeeMale, 3322);
+    Student stud2("Krzysztof", "baba", "Torun", "03222576535", ID::StudentMale, "2869");
+    uniDb.addStudent(stud1);
+    uniDb.addEmployee(emp1);
+    uniDb.addEmployee(emp2);
+    uniDb.addEmployee(emp3);
+    uniDb.addEmployee(emp4);
+    uniDb.addStudent(stud2);
+
+    //change in earnings of a person in position 2 
+    size_t new_earnings = 7777;
+    uniDb.modificationOfEarnings("83091644917",new_earnings);
+    size_t changed_earnings  = uniDb.db_[2]->getEarnings();
+    ASSERT_EQ(new_earnings,changed_earnings);
+
+    // wrong pesel
+    new_earnings = 2222;
+    bool return_value = uniDb.modificationOfEarnings("83091644900",new_earnings);
+    ASSERT_EQ(return_value,false);
+
+}

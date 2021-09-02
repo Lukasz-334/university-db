@@ -23,14 +23,14 @@ public:
    
     bool addEmployee(const Employee&);
     bool addStudent(const Student&);
-    void deleteStudent(const std::string& index);
+    bool deleteStudent(const std::string&);
 
 
     void sortByEarnings();
     void sortByPesel();
     void sortBySurname();
     
-    void modificationOfEarnings(); 
+    bool modificationOfEarnings(const std::string&,const size_t&); 
     
     
 };
@@ -50,7 +50,7 @@ public:
     Sortowanie po nazwisku OK
     Sortowanie po zarobkach (problematyczne) OK
     
-    Usuwanie po numerze indeksu OK
+    Usuwanie po numerze indeksu OK 
     Walidacja czy numer PESEL jest poprawny Wiki - poprawność PESEL (trudne) OK
     Wczytywanie z pliku i zapisywanie całej bazy w pliku (trudne)
     

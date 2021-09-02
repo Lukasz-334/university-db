@@ -60,9 +60,9 @@ bool DataBase::checkPesel(size_t pesel) {
 
 bool DataBase::searchPesel(const std::string& pesel) {
     auto index_position = find_if(begin(db_), end(db_), [pesel](const std::unique_ptr<Person>& ptr) {
-        return pesel==ptr->getPesel();
+        return pesel == ptr->getPesel();
     });
-    return index_position == end(db_);                           
+    return index_position == end(db_);
 }
 
 bool DataBase::addEmployee(const Employee& person) {
@@ -144,35 +144,26 @@ std::vector<Person*> DataBase::searchSurname(const std::string& surname) {
     return vecSurname;
 }
 
-void DataBase::modificationOfEarnings() {
-    std::size_t amount;
-    std::string pesel;
-    bool peselFound = false;
-    std::cout << "enter the employee's PESEL number: ";
-    std::cin >> pesel;
-    for (long unsigned int i = 0; i < db_.size(); i++) {
-        if ((db_[i]->getPesel() == pesel)) {
-            std::cout << "earnings to change: ";
-            std::cin >> amount;
-            db_[i]->setEarnings(amount);
-            peselFound = true;
-            break;
-        }
+bool DataBase::modificationOfEarnings(const std::string& pesel, const size_t& new_earnings) {
+    auto index = std::find_if(begin(db_), end(db_), [pesel](const std::unique_ptr<Person>& ptr) {
+        return pesel == ptr->getPesel();
+    });
+    if (index != end(db_)) {
+        auto const index_position = std::distance(begin(db_), index);
+        db_[index_position]->setEarnings(new_earnings);
+        return true;
     }
-    if (peselFound == false) {
-        std::cout << "Wrong PESEL !\n ";
-    }
+    return false;
 }
 
-void DataBase::deleteStudent(const std::string& index) {
+bool DataBase::deleteStudent(const std::string& index) {
     auto index_position = find_if(begin(db_), end(db_), [index](const std::unique_ptr<Person>& ptr) {
         return (index == ptr->getIndex());
     });
 
     if (index_position != std::end(db_)) {
         db_.erase(index_position);
-        std::cout << "Student removed" << '\n';
-    } else {
-        std::cout << "Index nr " << index << " not found" << '\n';
-    }
+        return true;
+    } 
+    return false;
 }
