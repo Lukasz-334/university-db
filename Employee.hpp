@@ -14,5 +14,5 @@ public:
     std::string getTypeOfPerson() const;
 private:
     size_t earnings_;
-    const std::string type_of_person="employee";
+    const std::string type_of_person ="employee";
 };

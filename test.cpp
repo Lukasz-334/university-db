@@ -42,11 +42,11 @@ TEST(changeToSmallTest, changeUppercaseToLowercase) {
 }
 
 TEST(addEmployeeTest, testOfAddingAPersonToTheDatabase) {
-    Employee emp("Adam", "Konieczny", "Warszawa", "01241249667", ID::EmployeeMale, 5678);
-    Employee emp1("Ala", "Bala", "Warszawa", "47052253642", ID::EmployeeFemale, 1245);
-    Employee emp2("Piotr", "Konieczny", "Warszawa", "98010233714", ID::EmployeeMale, 3452);
-    Employee emp3("Ryszard", "Konieczny", "Toruń", "98010233714", ID::EmployeeMale, 3453);
-    Employee emp4("Zbigniew", "Nowak", "Toruń", "111111111", ID::EmployeeMale, 3753);
+    Employee emp("Adam", "Konieczny", "Warszawa", "01241249667", ID::Male, 5678);
+    Employee emp1("Ala", "Bala", "Warszawa", "47052253642", ID::Female, 1245);
+    Employee emp2("Piotr", "Konieczny", "Warszawa", "98010233714", ID::Male, 3452);
+    Employee emp3("Ryszard", "Konieczny", "Toruń", "98010233714", ID::Male, 3453);
+    Employee emp4("Zbigniew", "Nowak", "Toruń", "111111111", ID::Male, 3753);
 
     ASSERT_EQ(uniDb.addEmployee(emp), true);
     ASSERT_EQ(uniDb.addEmployee(emp1), true);
@@ -58,9 +58,9 @@ TEST(addEmployeeTest, testOfAddingAPersonToTheDatabase) {
 TEST(deleteStudentTest, testToRemoveAStudentFromTheBase) {
     uniDb.db_.clear();
 
-    Student stud1("Ala", "Lala", "Warszawa", "47052253642", ID::StudentFemale, "5678");
-    Student stud2("Adam", "Konieczny", "Warszawa", "01241249667", ID::StudentMale, "1234");
-    Student stud3("Piotr", "Nowak", "Warszawa", "98010233714", ID::StudentMale, "9876");
+    Student stud1("Ala", "Lala", "Warszawa", "47052253642", ID::Female, "5678");
+    Student stud2("Adam", "Konieczny", "Warszawa", "01241249667", ID::Male, "1234");
+    Student stud3("Piotr", "Nowak", "Warszawa", "98010233714", ID::Male, "9876");
     uniDb.addStudent(stud1);
     uniDb.addStudent(stud2);
     uniDb.addStudent(stud3);
@@ -76,9 +76,9 @@ TEST(deleteStudentTest, testToRemoveAStudentFromTheBase) {
 
 TEST(searchPeselTest, returnsFalseIfPeselExists) {
     uniDb.db_.clear();
-    Student stud1("Ala", "Lala", "Warszawa", "47052253642", ID::StudentFemale, "5678");
-    Student stud2("Adam", "Konieczny", "Warszawa", "01241249667", ID::StudentMale, "1234");
-    Student stud3("Piotr", "Nowak", "Warszawa", "98010233714", ID::StudentMale, "9876");
+    Student stud1("Ala", "Lala", "Warszawa", "47052253642", ID::Female, "5678");
+    Student stud2("Adam", "Konieczny", "Warszawa", "01241249667", ID::Male, "1234");
+    Student stud3("Piotr", "Nowak", "Warszawa", "98010233714", ID::Male, "9876");
     uniDb.addStudent(stud1);
     uniDb.addStudent(stud2);
     uniDb.addStudent(stud3);
@@ -90,10 +90,10 @@ TEST(searchPeselTest, returnsFalseIfPeselExists) {
 
 TEST(searchSurnameTest, returnsAVectorOfSurnames) {
     uniDb.db_.clear();
-    Student stud1("Ala", "Lala", "Warszawa", "47052253642", ID::StudentFemale, "5678");
-    Student stud2("Adam", "Konieczny", "Warszawa", "01241249667", ID::StudentMale, "1234");
-    Student stud3("Piotr", "Konieczny", "Warszawa", "98010233714", ID::StudentMale, "9876");
-    Employee emp("Jan", "Nowak", "Sochaczew", "02322962488", ID::EmployeeMale, 5678);
+    Student stud1("Ala", "Lala", "Warszawa", "47052253642", ID::Female, "5678");
+    Student stud2("Adam", "Konieczny", "Warszawa", "01241249667", ID::Male, "1234");
+    Student stud3("Piotr", "Konieczny", "Warszawa", "98010233714", ID::Male, "9876");
+    Employee emp("Jan", "Nowak", "Sochaczew", "02322962488", ID::Male, 5678);
 
     uniDb.addStudent(stud1);
     uniDb.addStudent(stud2);
@@ -110,16 +110,16 @@ TEST(searchSurnameTest, returnsAVectorOfSurnames) {
 
 TEST(sortByEarningsTest, SortsEarningsInAscendingOrder) {
     uniDb.db_.clear();
-    Student stud1("Ala", "Lala", "Warszawa", "47052253642", ID::StudentFemale, "5678");
-    Student stud2("Adam", "Konieczny", "Warszawa", "01241249667", ID::StudentMale, "1234");
-    Employee emp1("Jan", "Nowak", "Sochaczew", "02322962488", ID::EmployeeMale, 5678);
-    Student stud3("Piotr", "Konieczny", "Warszawa", "98010233714", ID::StudentMale, "9876");
-    Employee emp2("Piotr", "Narewski", "Sochaczew", "79051074234", ID::EmployeeMale, 2623);
-    Employee emp3("John", "Smith", "NewYork", "83091644917", ID::EmployeeMale, 3467);
-    Employee emp4("Jacek", "Frydrych", "NewYork", "03282974346", ID::EmployeeMale, 1467);
-    Employee emp5("Helena", "Zez", "Opole", "91031583965", ID::EmployeeMale, 3322);
-    Student stud4("Krzysztof", "Bukowski", "Torun", "03222576535", ID::StudentMale, "2869");
-    Employee emp6("Teodora", "Kamyk", "Kamion", "03310167447", ID::EmployeeMale, 10731);
+    Student stud1("Ala", "Lala", "Warszawa", "47052253642", ID::Female, "5678");
+    Student stud2("Adam", "Konieczny", "Warszawa", "01241249667", ID::Male, "1234");
+    Employee emp1("Jan", "Nowak", "Sochaczew", "02322962488", ID::Male, 5678);
+    Student stud3("Piotr", "Konieczny", "Warszawa", "98010233714", ID::Male, "9876");
+    Employee emp2("Piotr", "Narewski", "Sochaczew", "79051074234", ID::Male, 2623);
+    Employee emp3("John", "Smith", "NewYork", "83091644917", ID::Male, 3467);
+    Employee emp4("Jacek", "Frydrych", "NewYork", "03282974346", ID::Male, 1467);
+    Employee emp5("Helena", "Zez", "Opole", "91031583965", ID::Male, 3322);
+    Student stud4("Krzysztof", "Bukowski", "Torun", "03222576535", ID::Male, "2869");
+    Employee emp6("Teodora", "Kamyk", "Kamion", "03310167447", ID::Male, 10731);
     uniDb.addStudent(stud2);
     uniDb.addStudent(stud3);
     uniDb.addEmployee(emp5);
@@ -168,16 +168,16 @@ TEST(sortByPeselTest, SortsPeselInAscendingOrder) {
 
 TEST(sortBySurnameTest, SortsSurnameInAscendingOrder) {
     uniDb.db_.clear();
-    Student stud1("Ala", "Cccd", "Warszawa", "47052253642", ID::StudentFemale, "5678");
-    Student stud2("Adam", "ZZZZ", "Warszawa", "01241249667", ID::StudentMale, "1234");
-    Employee emp1("Jan", "aBBB", "Sochaczew", "02322962488", ID::EmployeeMale, 5678);
-    Student stud3("Piotr", "bacB", "Warszawa", "98010233714", ID::StudentMale, "9876");
-    Employee emp2("Piotr", "aBCB", "Sochaczew", "79051074234", ID::EmployeeMale, 2623);
-    Employee emp3("John", "Dada", "NewYork", "83091644917", ID::EmployeeMale, 3467);
-    Employee emp4("Jacek", "CcCC", "NewYork", "03282974346", ID::EmployeeMale, 1467);
-    Employee emp5("Helena", "Aabb", "Opole", "91031583965", ID::EmployeeMale, 3322);
-    Student stud4("Krzysztof", "baba", "Torun", "03222576535", ID::StudentMale, "2869");
-    Employee emp6("Teodora", "Dbda", "Kamion", "03310167447", ID::EmployeeMale, 10731);
+    Student stud1("Ala", "Cccd", "Warszawa", "47052253642", ID::Female, "5678");
+    Student stud2("Adam", "ZZZZ", "Warszawa", "01241249667", ID::Male, "1234");
+    Employee emp1("Jan", "aBBB", "Sochaczew", "02322962488", ID::Male, 5678);
+    Student stud3("Piotr", "bacB", "Warszawa", "98010233714", ID::Male, "9876");
+    Employee emp2("Piotr", "aBCB", "Sochaczew", "79051074234", ID::Male, 2623);
+    Employee emp3("John", "Dada", "NewYork", "83091644917", ID::Male, 3467);
+    Employee emp4("Jacek", "CcCC", "NewYork", "03282974346", ID::Male, 1467);
+    Employee emp5("Helena", "Aabb", "Opole", "91031583965", ID::Male, 3322);
+    Student stud4("Krzysztof", "baba", "Torun", "03222576535", ID::Male, "2869");
+    Employee emp6("Teodora", "Dbda", "Kamion", "03310167447", ID::Male, 10731);
     uniDb.addStudent(stud2);
     uniDb.addStudent(stud3);
     uniDb.addEmployee(emp5);
@@ -211,12 +211,12 @@ TEST(sortBySurnameTest, SortsSurnameInAscendingOrder) {
 
 TEST(modificationOfEarningsTest, changesEarningsWhenThePeselIsCorrect) {
     uniDb.db_.clear();
-    Student stud1("Piotr", "bacB", "Warszawa", "98010233714", ID::StudentMale, "9876");
-    Employee emp1("Piotr", "aBCB", "Sochaczew", "79051074234", ID::EmployeeMale, 2623);
-    Employee emp2("John", "Dada", "NewYork", "83091644917", ID::EmployeeMale, 3467);
-    Employee emp3("Jacek", "CcCC", "NewYork", "03282974346", ID::EmployeeMale, 1467);
-    Employee emp4("Helena", "Aabb", "Opole", "91031583965", ID::EmployeeMale, 3322);
-    Student stud2("Krzysztof", "baba", "Torun", "03222576535", ID::StudentMale, "2869");
+    Student stud1("Piotr", "bacB", "Warszawa", "98010233714", ID::Male, "9876");
+    Employee emp1("Piotr", "aBCB", "Sochaczew", "79051074234", ID::Male, 2623);
+    Employee emp2("John", "Dada", "NewYork", "83091644917", ID::Male, 3467);
+    Employee emp3("Jacek", "CcCC", "NewYork", "03282974346", ID::Male, 1467);
+    Employee emp4("Helena", "Aabb", "Opole", "91031583965", ID::Male, 3322);
+    Student stud2("Krzysztof", "baba", "Torun", "03222576535", ID::Male, "2869");
     uniDb.addStudent(stud1);
     uniDb.addEmployee(emp1);
     uniDb.addEmployee(emp2);
