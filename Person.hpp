@@ -3,12 +3,9 @@
 #include <string>
 
 enum class ID : const char {
-    StudentMale = 'M',
-    StudentFemale = 'F',
-    StudentOther = 'O',
-    EmployeeMale = 'M',
-    EmployeeFemale = 'F',
-    EmployeeOther = 'O'
+    Male = 'M',
+    Female = 'F',
+    Other = 'O'
 };
 
 class Person {
@@ -18,7 +15,8 @@ public:
            const std::string surname,
            const std::string address,
            const std::string pesel,
-           const ID gender);  //enum
+           const ID gender
+           );  
 
     virtual ~Person() = default;
 

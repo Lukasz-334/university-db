@@ -1,9 +1,9 @@
 #pragma once
 #include <memory>
 #include <vector>
+#include "Employee.hpp"
 #include "Person.hpp"
 #include "Student.hpp"
-#include "Employee.hpp"
 
 class DataBase {
 private:
@@ -20,24 +20,20 @@ public:
 
     bool searchPesel(const std::string&);
     std::vector<Person*> searchSurname(const std::string&);
-   
+
     bool addEmployee(const Employee&);
     bool addStudent(const Student&);
     bool deleteStudent(const std::string&);
 
-
     void sortByEarnings();
     void sortByPesel();
     void sortBySurname();
-    
-    bool modificationOfEarnings(const std::string&,const size_t&); 
-    
-    
+
+    bool modificationOfEarnings(const std::string&, const size_t&);
+    void printDb(); 
 };
 
-
-
-/*
+    /*
 
    
     Dodawanie nowych studentów OK ( w 2 wersji dodawanie studenta i pracownika ) OK

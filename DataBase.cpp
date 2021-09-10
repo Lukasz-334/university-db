@@ -1,5 +1,6 @@
 #include "DataBase.hpp"
 #include <algorithm>
+#include <iomanip>
 #include <memory>
 #include <string>
 
@@ -150,7 +151,7 @@ bool DataBase::modificationOfEarnings(const std::string& pesel, const size_t& ne
     });
     if (index != end(db_)) {
         auto const index_position = std::distance(begin(db_), index);
-        if (db_[index_position]->getTypeOfPerson()=="employee") {
+        if (db_[index_position]->getTypeOfPerson() == "employee") {
             db_[index_position]->setEarnings(new_earnings);
             return true;
         }
@@ -168,4 +169,39 @@ bool DataBase::deleteStudent(const std::string& index) {
         return true;
     }
     return false;
+}
+
+void DataBase::printDb() {
+    int nr_person = 1;
+    int st = 20;
+    if (db_.size() > 0) {
+        std::cout << "[ID] ";
+        std::cout << std::left;
+        std::cout << std::setw(st) << "[      NAME       ]";
+        std::cout << std::setw(st) << "[     SURNAME     ]";
+        std::cout << std::setw(st) << "[      PESEL      ]";
+        // std::cout << std::setw(st) << "[      GENDER     ]";
+        std::cout << std::setw(st) << "[     ADDRESS     ]";
+        std::cout << std::setw(st) << "[      INDEX      ]";
+        std::cout << std::setw(st) << "[     EARNINGS    ]";
+
+        for (auto& person1 : db_) {
+            std::cout << '\n';
+            std::cout << std::right;
+            std::cout << std::setw(5) << nr_person << ".   ";
+            std::cout << std::left;
+            std::cout << std::setw(st) << person1->getName();
+            std::cout << std::setw(st) << person1->getSurname();
+            std::cout << std::setw(st) << person1->getPesel();
+            // std::cout << std::setw(st) << person1->getGender();
+            std::cout << std::setw(st) << person1->getAddress();
+            std::cout << std::setw(st) << person1->getIndex();
+            std::cout << std::setw(st) << person1->getEarnings();
+
+            nr_person++;
+        }
+        std::cout << '\n';
+    } else {
+        std::cout << "No records in database.\n";
+    }
 }
