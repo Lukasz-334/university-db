@@ -31,6 +31,7 @@ public:
 
     bool modificationOfEarnings(const std::string&, const size_t&);
     void printDb(); 
+    void saveDbToFile(const std::string&);
 };
 
     /*

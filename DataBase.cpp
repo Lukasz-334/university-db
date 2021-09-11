@@ -1,5 +1,6 @@
 #include "DataBase.hpp"
 #include <algorithm>
+#include <fstream>
 #include <iomanip>
 #include <memory>
 #include <string>
@@ -175,7 +176,6 @@ void DataBase::printDb() {
     int nr_person = 1;
     int st = 20;
     if (db_.size() > 0) {
-        std::cout << "[ID] ";
         std::cout << std::left;
         std::cout << std::setw(st) << "[      NAME       ]";
         std::cout << std::setw(st) << "[     SURNAME     ]";
@@ -203,5 +203,40 @@ void DataBase::printDb() {
         std::cout << '\n';
     } else {
         std::cout << "No records in database.\n";
+    }
+}
+
+void DataBase::saveDbToFile(const std::string& file_name) {
+    int st = 20;
+    std::ofstream str;
+    str.open(file_name);
+
+    if (db_.size() > 0) {
+        str << std::left;
+        str << std::setw(st) << "[      NAME       ]";
+        str << std::setw(st) << "[     SURNAME     ]";
+        str << std::setw(st) << "[      PESEL      ]";
+        str << std::setw(st) << "[      GENDER     ]";
+        str << std::setw(st) << "[     ADDRESS     ]";
+        str << std::setw(st) << "[      INDEX      ]";
+        str << std::setw(st) << "[     EARNINGS    ]";
+        str << '\n';
+        for (auto& person : db_) {
+            str << std::left;
+            str << "   ";
+            str << std::setw(st) << person->getName();
+            str << std::setw(st) << person->getSurname();
+            str << std::setw(st) << person->getPesel();
+            str << std::setw(st) << "gender";
+            str << std::setw(st) << person->getAddress();
+            str << std::setw(st) << person->getIndex();
+            if (person->getTypeOfPerson() == "student") {
+                str << std::setw(st) << "no earnings";
+            } else {
+                str << std::setw(st) << person->getEarnings();
+            }
+
+            str << '\n';
+        }
     }
 }
