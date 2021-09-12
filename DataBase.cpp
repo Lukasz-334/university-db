@@ -176,11 +176,12 @@ void DataBase::printDb() {
     int nr_person = 1;
     int st = 20;
     if (db_.size() > 0) {
+        std::cout << "     ";
         std::cout << std::left;
         std::cout << std::setw(st) << "[      NAME       ]";
         std::cout << std::setw(st) << "[     SURNAME     ]";
         std::cout << std::setw(st) << "[      PESEL      ]";
-        // std::cout << std::setw(st) << "[      GENDER     ]";
+        std::cout << std::setw(st) << "[      GENDER     ]";
         std::cout << std::setw(st) << "[     ADDRESS     ]";
         std::cout << std::setw(st) << "[      INDEX      ]";
         std::cout << std::setw(st) << "[     EARNINGS    ]";
@@ -193,10 +194,14 @@ void DataBase::printDb() {
             std::cout << std::setw(st) << person1->getName();
             std::cout << std::setw(st) << person1->getSurname();
             std::cout << std::setw(st) << person1->getPesel();
-            // std::cout << std::setw(st) << person1->getGender();
+            std::cout << std::setw(st) << static_cast<char>(person1->getGender());
             std::cout << std::setw(st) << person1->getAddress();
             std::cout << std::setw(st) << person1->getIndex();
-            std::cout << std::setw(st) << person1->getEarnings();
+            if (person1->getTypeOfPerson() == "student") {
+                std::cout << std::setw(st) << "no_earnings";
+            } else {
+                std::cout << std::setw(st) << person1->getEarnings();
+            }
 
             nr_person++;
         }
@@ -206,37 +211,67 @@ void DataBase::printDb() {
     }
 }
 
-void DataBase::saveDbToFile(const std::string& file_name) {
+void DataBase::saveDataBaseToFile(const std::string& file_name) {
     int st = 20;
     std::ofstream str;
     str.open(file_name);
 
     if (db_.size() > 0) {
-        str << std::left;
-        str << std::setw(st) << "[      NAME       ]";
-        str << std::setw(st) << "[     SURNAME     ]";
-        str << std::setw(st) << "[      PESEL      ]";
-        str << std::setw(st) << "[      GENDER     ]";
-        str << std::setw(st) << "[     ADDRESS     ]";
-        str << std::setw(st) << "[      INDEX      ]";
-        str << std::setw(st) << "[     EARNINGS    ]";
-        str << '\n';
         for (auto& person : db_) {
             str << std::left;
             str << "   ";
+            str << std::setw(st) << person->getTypeOfPerson();
             str << std::setw(st) << person->getName();
             str << std::setw(st) << person->getSurname();
             str << std::setw(st) << person->getPesel();
-            str << std::setw(st) << "gender";
+            str << std::setw(st) << static_cast<char>(person->getGender());
             str << std::setw(st) << person->getAddress();
             str << std::setw(st) << person->getIndex();
             if (person->getTypeOfPerson() == "student") {
-                str << std::setw(st) << "no earnings";
+                str << std::setw(st) << "no_earnings";
             } else {
                 str << std::setw(st) << person->getEarnings();
             }
 
             str << '\n';
+        }
+    }
+    str.close();
+}
+
+void DataBase::loadDataBaseFromFile(const std::string& base_txt, DataBase& base) {
+    std::ifstream str(base_txt);
+    std::string type_of_person;
+    std::string name;
+    std::string surname;
+    std::string address;
+    std::string pesel;
+    ID gender2;
+    char gender = 'O';
+    size_t earnings = 0;
+    std::string earnings_s;
+    std::string index;
+    while (str >> type_of_person) {
+        if (type_of_person == "student") {
+            str >> name >> surname >> pesel >> gender >> address >> index >> earnings_s;
+            if (gender == 'M') {
+                gender2 = ID::Male;
+            } else {
+                gender2 = ID::Female;
+            }
+
+            Student st(name, surname, address, pesel, gender2, index);
+            base.addStudent(st);
+
+        } else {
+            str >> name >> surname >> pesel >> gender >> address >> index >> earnings;
+            if (gender == 'M') {
+                gender2 = ID::Male;
+            } else {
+                gender2 = ID::Female;
+            }
+            Employee emp(name, surname, address, pesel, gender2, earnings);
+            base.addEmployee(emp);
         }
     }
 }

@@ -30,15 +30,16 @@ public:
     void sortBySurname();
 
     bool modificationOfEarnings(const std::string&, const size_t&);
-    void printDb(); 
-    void saveDbToFile(const std::string&);
+    void printDb();
+    void saveDataBaseToFile(const std::string&);
+    void loadDataBaseFromFile(const std::string&, DataBase&);
 };
 
-    /*
+/*
 
    
     Dodawanie nowych studentów OK ( w 2 wersji dodawanie studenta i pracownika ) OK
-    Wyświetlanie całej bazy danych 
+    Wyświetlanie całej bazy danych ok
     
     Wyszukiwanie po nazwisku OK
     Wyszukiwanie po numerze PESEL OK
@@ -49,14 +50,12 @@ public:
     
     Usuwanie po numerze indeksu OK 
     Walidacja czy numer PESEL jest poprawny Wiki - poprawność PESEL (trudne) OK
-    Wczytywanie z pliku i zapisywanie całej bazy w pliku (trudne)
+    Wczytywanie z pliku i zapisywanie całej bazy w pliku (trudne) ok
     
     Przechowywanie rekordów pracowników uczelni o strukturze: imię, nazwisko, PESEL, płeć, adres, zarobki
     Wszystkie osoby niezależnie czy będą to pracownicy, czy studenci mają być trzymani w jednym kontenerze
     Wypełnianie bazy danych sztucznymi danymi (generowanie danych)
-    Modyfikacja zarobków wyszukując osobę po numerze PESEL (problematyczne) Jest ok ale można ulepszyć
-    po dopisaniu zmiennej statycznej static string type_of_person = "student"; 
-    static string type_of_person = "employee";
+    Modyfikacja zarobków wyszukując osobę po numerze PESEL (problematyczne) ok
 
 
 
