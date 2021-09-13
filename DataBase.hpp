@@ -33,6 +33,23 @@ public:
     void printDb();
     void saveDataBaseToFile(const std::string&);
     void loadDataBaseFromFile(const std::string&, DataBase&);
+    void dataGeneration();
+    
+    Student generatingStudentData();
+    Employee GeneratingEmployeeData();
+    size_t generatingANumber(size_t); 
+    std::string generatingAMaleName();
+    std::string generatingAFemaleName();
+
+    std::string generatingAMaleSurname();
+    std::string generatingAFemaleSurname();
+
+    std::string generatingAPeselMale();
+    std::string generatingAPeselFemale();
+
+    std::string generatingAddress();
+    std::string generatingIndex();
+    size_t generatingEarnings();
 };
 
 /*

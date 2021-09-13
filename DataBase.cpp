@@ -3,6 +3,7 @@
 #include <fstream>
 #include <iomanip>
 #include <memory>
+#include <random>
 #include <string>
 
 DataBase::DataBase(size_t size = 0) {
@@ -274,4 +275,119 @@ void DataBase::loadDataBaseFromFile(const std::string& base_txt, DataBase& base)
             base.addEmployee(emp);
         }
     }
+}
+
+size_t DataBase::generatingANumber(size_t range) {
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<size_t> distrib(0, range);
+    return distrib(gen);
+}
+
+std::string DataBase::generatingAMaleName() {
+    std::vector<std::string> name{"Bartosz", "Allan", "Artur", "Wiktor", "Sylwester"};
+    size_t index_tab = generatingANumber(name.size() - 1);
+    return name.at(index_tab);
+}
+std::string DataBase::generatingAFemaleName() {
+    std::vector<std::string> name{"Mariola", "Anna", "Sylwia", "Irena", "Alicja"};
+    size_t index_tab = generatingANumber(name.size() - 1);
+    return name.at(index_tab);
+}
+std::string DataBase::generatingAMaleSurname() {
+    std::vector<std::string> surname{"Kapustka", "Kowalski", "Lewandowski", "Bednarek", "Kowalczyk"};
+    size_t index_tab = generatingANumber(surname.size() - 1);
+    return surname.at(index_tab);
+}
+std::string DataBase::generatingAFemaleSurname() {
+    std::vector<std::string> surname{"Lewandowska", "Stanowska", "Nowak", "Kowalewska", "Konieczna"};
+    size_t index_tab = generatingANumber(surname.size() - 1);
+    return surname.at(index_tab);
+}
+std::string DataBase::generatingAPeselMale() {
+    std::vector<std::string> pesel{"03222576535", "83091644917", "79051074234", "98010233714", "01241249667"};
+    size_t index_tab = generatingANumber(pesel.size() - 1);
+    return pesel.at(index_tab);
+}
+std::string DataBase::generatingAPeselFemale() {
+    std::vector<std::string> pesel{"03310167447", "91031583965", "03282974346", "02322962488", "47052253642"};
+    size_t index_tab = generatingANumber(pesel.size() - 1);
+    return pesel.at(index_tab);
+}
+std::string DataBase::generatingAddress() {
+    std::vector<std::string> address{"Opole", "Krakow", "Bydgoszcz", "Warszawa", "Torun", "Budapeszt", "Wilno", "Turyn", "Gdansk", "Gdynia"};
+    size_t index_tab = generatingANumber(address.size() - 1);
+    return address.at(index_tab);
+}
+std::string DataBase::generatingIndex() {
+    std::string index;
+    for (int i = 0; i < 5; i++) {
+        std::random_device rd;
+        std::mt19937 gen(rd());
+        std::uniform_int_distribution<size_t> distrib(0, 9);
+        index += std::to_string(distrib(gen));
+    }
+    return index;
+}
+size_t DataBase::generatingEarnings() {
+    std::string index;
+
+    for (int i = 1; i <= 4; i++) {
+        std::random_device rd;
+        std::mt19937 gen(rd());
+        std::uniform_int_distribution<size_t> distrib(0, 9);
+        index += std::to_string(distrib(gen));
+    }
+    return std::stoull(index);
+}
+
+Student DataBase::generatingStudentData() {
+    std::string name;
+    std::string surname;
+    std::string address;
+    std::string pesel;
+    std::string index;
+    ID gen;
+    address = generatingAddress();
+    index = generatingIndex();
+    bool gender = generatingANumber(1);
+    if (gender) {
+        name = generatingAMaleName();
+        surname = generatingAMaleSurname();
+        pesel = generatingAPeselMale();
+        gen = ID::Male;
+
+    } else {
+        name = generatingAFemaleName();
+        surname = generatingAFemaleSurname();
+        pesel = generatingAPeselFemale();
+        gen = ID::Female;
+    }
+    Student stud(name, surname, address, pesel, gen, index);
+    return stud;
+}
+
+Employee DataBase::GeneratingEmployeeData() {
+    std::string name;
+    std::string surname;
+    std::string address;
+    std::string pesel;
+    ID gen;
+    size_t earnings;
+    bool gender = generatingANumber(1);
+    address = generatingAddress();
+    earnings = generatingEarnings();
+    if (gender) {
+        name = generatingAMaleName();
+        surname = generatingAMaleSurname();
+        pesel = generatingAPeselMale();
+        gen = ID::Male;
+    } else {
+        name = generatingAFemaleName();
+        surname = generatingAFemaleSurname();
+        pesel = generatingAPeselFemale();
+        gen = ID::Female;
+    }
+    Employee emp(name, surname, address, pesel, gen, earnings);
+    return emp;
 }
