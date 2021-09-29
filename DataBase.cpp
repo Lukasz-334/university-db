@@ -285,37 +285,44 @@ size_t DataBase::generatingANumber(size_t range) {
 }
 
 std::string DataBase::generatingAMaleName() {
-    std::vector<std::string> name{"Bartosz", "Allan", "Artur", "Wiktor", "Sylwester"};
+    std::vector<std::string> name{"Bartosz", "Allan", "Artur", "Wiktor", "Sylwester","Filip", "Antoni", 
+    "Szymon", "Franciszek", "Mikołaj", "Kacper", "Wiktor", "Leon", "Aleksander", "Nikodem"};
     size_t index_tab = generatingANumber(name.size() - 1);
     return name.at(index_tab);
 }
 std::string DataBase::generatingAFemaleName() {
-    std::vector<std::string> name{"Mariola", "Anna", "Sylwia", "Irena", "Alicja"};
+    std::vector<std::string> name{"Mariola", "Anna", "Sylwia", "Irena", "Alicja", "Małgorzata", "Maria",
+     "Katarzyna", "Ewa", "Julia","Zuzanna", "Oliwia", "Hanna", "Lena", "Maja"};
     size_t index_tab = generatingANumber(name.size() - 1);
     return name.at(index_tab);
 }
 std::string DataBase::generatingAMaleSurname() {
-    std::vector<std::string> surname{"Kapustka", "Kowalski", "Lewandowski", "Bednarek", "Kowalczyk"};
+    std::vector<std::string> surname{"Kapustka", "Kowalski", "Nowak", "Szymaniak", "Jankowski", "Mazur", 
+    "Wojciechowski" "Krawczyk", "Bednarek", "Kowalczyk", "Dudek", "Nowicki", "Tarka", "Baran", "Rak", "Lis",};
     size_t index_tab = generatingANumber(surname.size() - 1);
     return surname.at(index_tab);
 }
 std::string DataBase::generatingAFemaleSurname() {
-    std::vector<std::string> surname{"Lewandowska", "Stanowska", "Nowak", "Kowalewska", "Konieczna"};
+    std::vector<std::string> surname{"Lewandowska", "Stanowska", "Nowak", "Kowalewska", "Konieczna", "Czarnecka", 
+    "Sawicka", "Wilk", "Sikora", "Zmora", "Pawlak", "Ostrowska", "Kubiak", "Wysocka", "Soplica"};
     size_t index_tab = generatingANumber(surname.size() - 1);
     return surname.at(index_tab);
 }
 std::string DataBase::generatingAPeselMale() {
-    std::vector<std::string> pesel{"03222576535", "83091644917", "79051074234", "98010233714", "01241249667"};
+    std::vector<std::string> pesel{"03222576535", "83091644917", "79051074234", "98010233714", "01241249667", "70051539918",
+     "01292143453", "86081464872", "71111164293", "92010865357", "66041261514","62070945999", "71120671436", "72052816531", "74031445855"};
     size_t index_tab = generatingANumber(pesel.size() - 1);
     return pesel.at(index_tab);
 }
 std::string DataBase::generatingAPeselFemale() {
-    std::vector<std::string> pesel{"03310167447", "91031583965", "03282974346", "02322962488", "47052253642"};
+    std::vector<std::string> pesel{"03310167447", "91031583965", "03282974346", "02322962488", "47052253642", "63060678668", "52070635385",
+     "79041752944", "05301387685", "80112499664", "50031252961", "92050559962", "58011051168", "55041364242","03261741141"};
     size_t index_tab = generatingANumber(pesel.size() - 1);
     return pesel.at(index_tab);
 }
 std::string DataBase::generatingAddress() {
-    std::vector<std::string> address{"Opole", "Krakow", "Bydgoszcz", "Warszawa", "Torun", "Budapeszt", "Wilno", "Turyn", "Gdansk", "Gdynia"};
+    std::vector<std::string> address{"Opole", "Krakow", "Bydgoszcz", "Warszawa", "Torun", "Budapeszt", "Wilno", "Turyn", "Gdansk", 
+    "Gdynia", "Piaski", "Kolonia", "Folwark", "Zalesie", "Budy", "Nowiny", "Bugaj", "Ruda", "Potok", "Huta", "Podzamcze", "Marysin"};
     size_t index_tab = generatingANumber(address.size() - 1);
     return address.at(index_tab);
 }

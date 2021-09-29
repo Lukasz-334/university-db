@@ -19,7 +19,6 @@ std::string Student::getIndex() const {
     return index_;
 }
 
-
 std::string Student::getTypeOfPerson()const  {
 
     return type_of_person;
