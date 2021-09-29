@@ -6,7 +6,7 @@ Employee::Employee(const std::string name,
                    const std::string surname,
                    const std::string address,
                    const std::string pesel,
-                   const ID gender,  //enum
+                   const ID gender,
                    size_t earnings)
     : Person(name, surname, address, pesel, gender), earnings_(earnings){};
 
