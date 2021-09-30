@@ -52,32 +52,3 @@ public:
     size_t generatingEarnings();
 };
 
-/*
-
-   
-    Dodawanie nowych studentów OK ( w 2 wersji dodawanie studenta i pracownika ) OK
-    Wyświetlanie całej bazy danych ok
-    
-    Wyszukiwanie po nazwisku OK
-    Wyszukiwanie po numerze PESEL OK
-    
-    Sortowanie po numerze PESEL OK(rosnąco od najstarszych do najmłodszych)
-    Sortowanie po nazwisku OK
-    Sortowanie po zarobkach (problematyczne) OK
-    
-    Usuwanie po numerze indeksu OK 
-    Walidacja czy numer PESEL jest poprawny Wiki - poprawność PESEL (trudne) OK
-    Wczytywanie z pliku i zapisywanie całej bazy w pliku (trudne) ok
-    
-    Przechowywanie rekordów pracowników uczelni o strukturze: imię, nazwisko, PESEL, płeć, adres, zarobki
-    Wszystkie osoby niezależnie czy będą to pracownicy, czy studenci mają być trzymani w jednym kontenerze
-    Wypełnianie bazy danych sztucznymi danymi (generowanie danych)
-    Modyfikacja zarobków wyszukując osobę po numerze PESEL (problematyczne) ok
-
-
-
-
-
-
-
-*/
