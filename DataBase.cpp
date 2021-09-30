@@ -298,7 +298,7 @@ std::string DataBase::generatingAFemaleName() {
 }
 std::string DataBase::generatingAMaleSurname() {
     std::vector<std::string> surname{"Kapustka", "Kowalski", "Nowak", "Szymaniak", "Jankowski", "Mazur", 
-    "Wojciechowski" "Krawczyk", "Bednarek", "Kowalczyk", "Dudek", "Nowicki", "Tarka", "Baran", "Rak", "Lis",};
+    "Wojciechowski", "Krawczyk", "Bednarek", "Kowalczyk", "Dudek", "Nowicki", "Tarka", "Baran", "Rak", "Lis",};
     size_t index_tab = generatingANumber(surname.size() - 1);
     return surname.at(index_tab);
 }

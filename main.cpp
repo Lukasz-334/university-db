@@ -9,22 +9,22 @@
 int main() {
     DataBase uniDb;
 
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 5; i++) {
         Student st = uniDb.generatingStudentData();
         uniDb.addStudent(st);
     }
 
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 5; i++) {
         Employee emp = uniDb.GeneratingEmployeeData();
         uniDb.addEmployee(emp);
     }
     uniDb.printDb();
 
-    // uniDb.saveDataBaseToFile("base.txt");
+    uniDb.saveDataBaseToFile("base.txt");
 
-    // uniDb.loadDataBaseFromFile("base.txt", uniDb);
+    //uniDb.loadDataBaseFromFile("base.txt", uniDb);
 
-    // uniDb.printDb();
+    //uniDb.printDb();
 
     return 0;
 }
