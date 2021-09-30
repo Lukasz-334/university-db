@@ -9,6 +9,8 @@
 int main() {
     DataBase uniDb;
 
+    std::cout << "Generating data for the database " << std::endl;
+
     for (int i = 0; i < 5; i++) {
         Student st = uniDb.generatingStudentData();
         uniDb.addStudent(st);
@@ -18,13 +20,14 @@ int main() {
         Employee emp = uniDb.GeneratingEmployeeData();
         uniDb.addEmployee(emp);
     }
-    uniDb.printDb();
+
+    std::cout << "Saving data to the database" << std::endl;
 
     uniDb.saveDataBaseToFile("base.txt");
 
-    //uniDb.loadDataBaseFromFile("base.txt", uniDb);
+    std::cout << "Printout of data from the database " << std::endl;
 
-    //uniDb.printDb();
+    uniDb.printDb();
 
     return 0;
 }
